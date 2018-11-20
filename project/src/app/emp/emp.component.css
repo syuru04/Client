@@ -5,3 +5,7 @@ table, th {
 fieldset {
     margin-top: 15px;
 }
+
+a {
+    cursor: pointer;
+}

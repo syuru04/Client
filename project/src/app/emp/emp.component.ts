@@ -12,4 +12,8 @@ export class EmpComponent implements OnInit {
   ngOnInit() {
   }
 
+  updateInfo(): void {
+    alert("수정");
+  }
+
 }
