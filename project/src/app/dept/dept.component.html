@@ -33,30 +33,30 @@
         <a class="btn btn-default btn-sm" id="btn_cancel">닫기</a> 
       </p>
     </fieldset>
-  </div>
-
-  <div class="table-responsive">
-    <p class="text-right">
-      <a class="btn btn-success btn-sm" id="btn_new">신규등록</a>
-    </p>
-    <table class="table table-bordered">
-      <thead>
-        <tr class="active">
-          <th>부서명</th>
-          <th>부서장</th>
-          <th>상위부서</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dept of depts">
-          <td><a (click)="f_update()">{{dept.name}}</a></td>
-          <td>{{dept.chief}}</td>
-          <td>{{dept.up_id}}</td>
-        </tr>
-      </tbody>       
-    </table>
-  </div>
+  </div>  
 </form>
+
+<div class="table-responsive">
+  <p class="text-right">
+    <a class="btn btn-success btn-sm" id="btn_new">신규등록</a>
+  </p>
+  <table class="table table-bordered">
+    <thead>
+      <tr class="active">
+        <th>부서명</th>
+        <th>부서장</th>
+        <th>상위부서</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of depts">
+        <td><a>{{dept.name}}</a></td>
+        <td>{{dept.chief}}</td>
+        <td>{{dept.upId}}</td>
+      </tr>
+    </tbody>       
+  </table>
+</div>
 
 
 

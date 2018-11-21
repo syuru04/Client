@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DeptService } from './dept-http.service';
+import { Dept } from './dept.model';
+
 @Component({
   selector: 'app-dept',
   templateUrl: './dept.component.html',
   styleUrls: ['./dept.component.css']
 })
 export class DeptComponent implements OnInit {
-  depts: any = [
-    { id:1, name:'개발부', chief:2, up_id:3},
-    { id:10, name:'마케팅부', chief:20, up_id:30}
-  ];
+  depts: Dept[];
 
-  newBtnClick = false;
+  constructor(private deptService: DeptService) { }
 
-  constructor() { }
-
-  ngOnInit() { } 
+  ngOnInit() { 
+    this.deptService.get().subscribe(response => {
+      this.depts = response.data as Dept[];
+    });
+  } 
 }
