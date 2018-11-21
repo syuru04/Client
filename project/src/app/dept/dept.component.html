@@ -1,3 +1,62 @@
-<p>
-  dept works!
-</p>
+<form class="form-horizontal">
+  <div class="well bs-component">
+    <fieldset>
+      <div class="row"> 
+        <div class="form-group">
+          <label class="col-lg-2 control-label">부서명</label>
+          <div class="col-lg-3">                              
+            <input type="text" class="form-control" id="deptName" name="deptName" required/>
+          </div>
+          <label class="col-lg-2 control-label">부서장</label>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" id="chief" name="chief" required/>
+          </div>                          
+        </div>
+      </div>
+
+      <div class="row"> 
+        <div class="form-group">
+          <label class="col-lg-2 control-label">상위부서</label>
+          <div class="col-lg-3">                              
+            <select class="form-control">
+              <option>총무부</option>
+              <option>마케팅부</option>
+              <option>개발부</option>
+            </select>
+          </div>            
+        </div>
+      </div>
+      
+      <p class="text-right">
+        <a class="btn btn-primary btn-sm" id="btn_del">삭제</a>&nbsp;
+        <a class="btn btn-primary btn-sm" id="btn_mod">수정</a>&nbsp;
+        <a class="btn btn-default btn-sm" id="btn_cancel">닫기</a> 
+      </p>
+    </fieldset>
+  </div>
+
+  <div class="table-responsive">
+    <p class="text-right">
+      <a class="btn btn-success btn-sm" id="btn_new">신규등록</a>
+    </p>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="active">
+          <th>부서명</th>
+          <th>부서장</th>
+          <th>상위부서</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dept of depts">
+          <td><a (click)="f_update()">{{dept.name}}</a></td>
+          <td>{{dept.chief}}</td>
+          <td>{{dept.up_id}}</td>
+        </tr>
+      </tbody>       
+    </table>
+  </div>
+</form>
+
+
+
