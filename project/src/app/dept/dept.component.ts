@@ -9,13 +9,28 @@ import { Dept } from './dept.model';
   styleUrls: ['./dept.component.css']
 })
 export class DeptComponent implements OnInit {
+  newFormYn="N";
+  newBtnCloseYn="N";
+
   depts: Dept[];
 
-  constructor(private deptService: DeptService) { }
+  constructor(private deptService: DeptService) { 
+    
+  }
 
   ngOnInit() { 
     this.deptService.get().subscribe(response => {
       this.depts = response.data as Dept[];
     });
   } 
+
+  btnNew_click() : void {
+    this.newFormYn="Y";
+    this.newBtnCloseYn = "Y";
+  }
+
+  btnCancel_click() : void {
+    this.newFormYn="N";
+    this.newBtnCloseYn = "N";
+  }
 }
