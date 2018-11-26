@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { NoteComponent } from '../note.component'
+import { Component, OnInit, Input } from '@angular/core';
+import { NoteService } from '../note-http.service';
+import { Note } from './note-body.model';
+import { NoteComponent } from '../note.component';
+
 @Component({
   selector: 'app-note-body',
   templateUrl: './note-body.component.html',
   styleUrls: ['./note-body.component.css']
 })
+
 export class NoteBodyComponent implements OnInit {
-  newNoteYn="Y";
-  newBtnYn="N";
-
-  constructor() { }
-
+  
+  id: Number;
+  constructor(private noteService: NoteService) {
+  }
+  notes: Note[];
+  
   ngOnInit() {
+    
   }
-
-  btnCancel_click() : void {
-    this.newNoteYn="N";
-    this.newBtnYn ="Y";
-  }
-
 }

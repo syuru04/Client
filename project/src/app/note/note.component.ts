@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Output ,EventEmitter } from '@angular/core';
 
 import { Note } from './note.model';
 import { NoteService } from './note-http.service';
 import { NoteBodyComponent} from './note-body/note-body.component';
+
+
 
 @Component({
   selector: 'app-note',
@@ -10,29 +12,18 @@ import { NoteBodyComponent} from './note-body/note-body.component';
   styleUrls: ['./note.component.css']
 })
 
-export class NoteComponent implements OnInit {
-  newNoteYn="N";
-  newBtnYn="Y";
-
+export class NoteComponent implements OnInit {    
   notes: Note[];
-
-  constructor(private noteService: NoteService) { }
-
+  constructor(private noteService: NoteService) { }  
+  id : Number;  
+  btnTitle_click(id: Number) {    
+    this.id = id;        
+    console.log(id);    
+  }
   ngOnInit() {
-    this.noteService.get().subscribe(data => {
-      this.notes = data;
+    this.noteService.get("").subscribe(data => {
+      this.notes = data;      
     });
-  }
-
-  btnNew_click() : void {
-    this.newNoteYn="Y";
-    this.newBtnYn = "N";
-  }
-
-  btnCancel_click() : void {
-    this.newNoteYn="N";
-    this.newBtnYn = "N";
-  }
-
+  }  
 }
 

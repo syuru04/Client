@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { Note } from './note.model';
+import { Note } from './note-body.model';
 
 
 const URL = 'http://localhost:8080/notes/';
@@ -12,11 +12,12 @@ const HTTP_OPTIONS = {
 };
 
 @Injectable({providedIn: 'root'})
-export class NoteService {
+export class NotebodyService {
+
   constructor(private http: HttpClient) {}
   
-  get(id): Observable<Note[]> {    
-    return this.http.get<Note[]>(URL+id);  
-  }   
+  get(id): Observable<Note[]> {        
+    return this.http.get<Note[]>(URL+id);
+  }
   
 }

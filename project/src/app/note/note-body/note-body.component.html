@@ -1,1 +1,43 @@
-내용
+<div class="table-responsive" ng-controller="Ctrl">
+    <form role="form" id="frmForm" name="frmForm" class="form-horizontal">
+        <div class="container">
+            <h4 class="sub-header">게시판 상세보기</h4>
+            <div class="table-responsive">
+                <table class="table-bordered">
+                    <tr>
+                        <th>작성일</th>
+                        <td>
+                            <!-- {{note.ts}} -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td>
+                            <!-- {{emp.name}} -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td>
+                            <!-- {{note.title}} -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
+                        {{id}}
+                        <td>
+                            <!-- {{note.body}} -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 게시판 버튼 -->
+            <p class="text-right" style="margin-top: 10px">
+                <a class="btn btn-default btn-sm" id="btn_del" href="#" onclick="">삭제</a>&nbsp;
+                <a class="btn btn-primary btn-sm" id="btn_mod" href="#" onclick="">수정</a>&nbsp;
+                <a class="btn btn-default btn-sm" id="btn_list">목록</a>
+            </p>
+
+        </div>
+    </form>
+</div>
