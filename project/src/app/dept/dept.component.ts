@@ -19,8 +19,8 @@ export class DeptComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.deptService.get().subscribe(response => {
-      this.depts = response.data as Dept[];
+    this.deptService.get().subscribe(data => {
+      this.depts = data;
     });
   } 
 

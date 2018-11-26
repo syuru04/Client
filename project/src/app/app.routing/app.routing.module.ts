@@ -7,13 +7,15 @@ import { DocComponent } from '../doc/doc.component';
 import { EmpComponent } from '../emp/emp.component';
 import { NoteComponent } from '../note/note.component';
 import { OrgChartComponent } from '../org-chart/org-chart.component';
+import { NewnoteComponent } from '../note/newnote/newnote.component';
 
 const routes: Routes = [
   { path: 'dept', component: DeptComponent },
   { path: 'doc', component: DocComponent },
   { path: 'emp', component: EmpComponent },
   { path: 'note', component: NoteComponent },
-  { path: 'org-chart', component: OrgChartComponent }
+  { path: 'org-chart', component: OrgChartComponent },
+  { path: 'newnote', component: NewnoteComponent }
   ];
 
 @NgModule({

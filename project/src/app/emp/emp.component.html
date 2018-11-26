@@ -1,5 +1,5 @@
 <form class="form-horizontal">
-  <div class="well bs-component">
+  <div class="well bs-component" *ngIf="newFormYn=='Y'">
     <fieldset>
       <div class="row"> 
         <div class="form-group">
@@ -42,15 +42,17 @@
       <p class="text-right">
         <a class="btn btn-success btn-sm" id="btn_del">삭제</a>&nbsp;
         <a class="btn btn-primary btn-sm" id="btn_mod">수정</a>&nbsp;
-        <a class="btn btn-default btn-sm" id="btn_cancel">닫기</a> 
+        <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel_click()">닫기</a> 
       </p>
     </fieldset>
   </div>
+  
 
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
         <tr class="active">
+          <th>번호</th>
           <th>ID</th>
           <th>이름</th>
           <th>연락처</th>
@@ -59,27 +61,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td><a (click)="updateInfo()">황대길</a></td>
-          <td>010-1111-2222</td>
-          <td>이메일</td>
-          <td>총무부</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>정재훈</td>
-          <td>010-1111-2222</td>
-          <td>이메일</td>
-          <td>개발부>개발1팀</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>전미경</td>
-          <td>010-1111-2222</td>
-          <td>이메일</td>
-          <td>개발부>개발1팀</td>
-        </tr>
+        <tr *ngFor="let emp of emps">        
+          <td>{{emp.id}}</td>
+          <td>{{emp.code}}</td>
+          <td><a (click)="updateInfo()"  >{{emp.name}}</a></td>
+          <td>{{emp.phone}}</td>
+          <td>{{emp.email}}</td>
+          <td>{{emp.deptName}}</td>
+        </tr>       
       </tbody>       
     </table>
   </div>

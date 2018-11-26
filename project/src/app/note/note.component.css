@@ -1,0 +1,11 @@
+table, th {
+    text-align: center;
+}
+
+fieldset {
+    margin-top: 15px;
+}
+
+a {
+    cursor: pointer;
+}

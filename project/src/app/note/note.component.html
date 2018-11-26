@@ -1,3 +1,23 @@
-<p>
-  note works!
-</p>
+<div class="table-responsive">  
+    <p class="text-right"*ngIf="newBtnYn=='Y'">
+      <a class="btn btn-success btn-sm" id="btn_new" routerLink="../newnote">글작성</a>          
+    </p>
+  <table class="table table-bordered">
+    <thead>
+      <tr class="active">
+        <th class="col-lg-1">번호</th>
+        <th class="col-lg-7">제목</th>
+        <th class="col-lg-2">작성자</th>        
+        <th class="col-lg-2">등록일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of notes" >
+        <td>{{note.id}}</td>
+        <td><a>{{note.title}}</a></td>          
+        <td>{{note.name}}</td>       
+        <td>{{note.stamp}}</td>
+      </tr>
+    </tbody>       
+  </table>  
+</div>

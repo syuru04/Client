@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Dept } from './dept.model';
-// import { Response } from './response.model';
+import { Note } from './note.model';
 
-const URL = 'http://localhost:8080/depts';
+
+const URL = 'http://localhost:8080/notes';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({providedIn: 'root'})
-export class DeptService {
+export class NoteService {
 
   constructor(private http: HttpClient) {}
 
-  get(): Observable<Dept[]> {
-    return this.http.get<Dept[]>(URL);
+  get(): Observable<Note[]> {
+    return this.http.get<Note[]>(URL);
   }
 }

@@ -10,6 +10,8 @@ import { DocComponent } from './doc/doc.component';
 import { NoteComponent } from './note/note.component';
 import { EmpComponent } from './emp/emp.component';
 import { OrgChartComponent } from './org-chart/org-chart.component';
+import { NoteBodyComponent } from './note/note-body/note-body.component';
+import { NewnoteComponent } from './note/newnote/newnote.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { OrgChartComponent } from './org-chart/org-chart.component';
     DocComponent,
     NoteComponent,
     EmpComponent,
-    OrgChartComponent
+    OrgChartComponent,    
+    NoteBodyComponent, NewnoteComponent
   ],
   imports: [
     BrowserModule,
