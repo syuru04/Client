@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Dept } from './dept.model';
+import { Org } from './org-chart.model';
 
-const URL = 'http://localhost:8080/depts';
+const URL = 'http://localhost:8080/depts/org';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({providedIn: 'root'})
-export class DeptService {
+export class OrgChartService {
   constructor(private http: HttpClient) {}
 
-  get(): Observable<Dept[]> {
-    return this.http.get<Dept[]>(URL);
+  get(): Observable<Org> {
+    return this.http.get<Org>(URL);
   }
 }

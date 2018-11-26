@@ -1,6 +1,8 @@
-export class Dept {
-    id: number;
-    name: string;
-    chief: number;
-    upId: number;
+export interface Dept {
+  id: number;
+  name: string;
+  chief: number;
+  chiefName: string;
+  upId: number;
+  upName: string;
 }

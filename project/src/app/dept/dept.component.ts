@@ -14,14 +14,10 @@ export class DeptComponent implements OnInit {
 
   depts: Dept[];
 
-  constructor(private deptService: DeptService) { 
-    
-  }
+  constructor(private deptService: DeptService) {}
 
   ngOnInit() { 
-    this.deptService.get().subscribe(response => {
-      this.depts = response.data as Dept[];
-    });
+    this.deptService.get().subscribe(data => this.depts = data);
   } 
 
   btnNew_click() : void {
