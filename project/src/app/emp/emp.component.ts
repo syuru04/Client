@@ -12,6 +12,8 @@ import { Dept } from '../dept/dept.model';
   styleUrls: ['./emp.component.css']
 })
 export class EmpComponent implements OnInit {
+  newFormYn="N";
+  newBtnCloseYn="N";
 
   openForm = "N";
 
