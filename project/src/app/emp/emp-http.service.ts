@@ -3,35 +3,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Dept } from './dept.model';
+import { Emp } from './emp.model';
 
-const URL = 'http://localhost:8080/depts';
+const URL = 'http://localhost:8080/emps/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({providedIn: 'root'})
-export class DeptService {
+export class EmpHttpService {
+
   constructor(private http: HttpClient) {}
 
-  get(): Observable<Dept[]> {
-    return this.http.get<Dept[]>(URL);
+  get(): Observable<Emp[]> {
+    return this.http.get<Emp[]>(URL);
   }
 
-  add(dept: Dept): Observable<Dept> {
-    return this.http.post<Dept>(URL, dept, HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('add'))
-    );
-  }
-
-  update(dept: Dept): Observable<any> {
-    return this.http.patch<Dept>(URL + dept.id, dept, HTTP_OPTIONS).pipe(
+  update(emp: Emp): Observable<any> {
+    return this.http.put<Emp>(URL, emp, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('update'))
     );
   }
 
-  remove(id: number): Observable<any> {
+  remove(id:number): Observable<any> {
     return this.http.delete(URL + id).pipe(
       catchError(this.handleError<any>('delete'))
     );
