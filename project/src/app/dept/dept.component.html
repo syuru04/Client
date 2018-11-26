@@ -1,5 +1,5 @@
 <div *ngIf="openForm=='Y'">
-  <form class="form-horizontal">
+  <form class="form-horizontal" #f="ngForm" (ngSubmit)="add(f)">
     <div class="well bs-component">
       <fieldset>
         <div class="row"> 
@@ -7,14 +7,14 @@
 
             <label class="col-lg-2 control-label">부서명</label>
             <div class="col-lg-3">  
-              <input *ngIf="newMode=='Y'" type="text" class="form-control" />                            
-              <input *ngIf="updateMode=='Y'" type="text" class="form-control" [value]="selectedDept.name"/>
+              <input class="form-control" *ngIf="newMode=='Y'" type="text" name="name"  [ngModel]="f.value.name" />                            
+              <input class="form-control" *ngIf="updateMode=='Y'" type="text" name="name" [value]="selectedDept.name"/>
             </div>
 
             <label class="col-lg-2 control-label">부서장</label>
             <div class="col-lg-3">
-              <input *ngIf="newMode=='Y'" type="text" class="form-control"/>
-              <input *ngIf="updateMode=='Y'" type="text" class="form-control" [value]="selectedDept.chiefName"/>
+              <input *ngIf="newMode=='Y'" type="text" name="chief" class="form-control"/>
+              <input *ngIf="updateMode=='Y'" type="text" name="chief" class="form-control" [value]="selectedDept.chiefName"/>
             </div>                          
           </div>
         </div>
@@ -23,10 +23,10 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">상위부서</label>
             <div class="col-lg-3">                              
-              <select class="form-control" *ngIf="newMode=='Y'">
+              <select class="form-control" *ngIf="newMode=='Y'" name="upId">
                 <option *ngFor="let dept of depts" [value]="dept.upId">{{dept.name}}</option>               
               </select>
-              <select class="form-control" *ngIf="updateMode=='Y'">
+              <select class="form-control" *ngIf="updateMode=='Y'" name="upId">
                   <option *ngFor="let dept of depts" [value]="dept.upId" [selected]="selectedDept.upId==dept.upId?true:null">{{dept.upName}}</option>
                 </select>
             </div>             
@@ -34,9 +34,9 @@
         </div>
         
         <p class="text-right">
-          <a class="btn btn-primary btn-sm">삭제</a>&nbsp;
-          <a class="btn btn-primary btn-sm">등록</a>&nbsp;
-          <a class="btn btn-default btn-sm" (click)="btnCancel_click()">닫기</a> 
+          <button class="btn btn-primary btn-sm">삭제</button>&nbsp;
+          <button type="submit" class="btn btn-primary btn-sm">등록</button>&nbsp;
+          <button class="btn btn-default btn-sm" (click)="btnCancel_click()">닫기</button> 
         </p>
       </fieldset>
     </div>  

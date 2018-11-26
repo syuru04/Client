@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { DeptService } from './dept-http.service';
 import { Dept } from './dept.model';
 
@@ -8,8 +10,6 @@ import { Dept } from './dept.model';
   styleUrls: ['./dept.component.css']
 })
 export class DeptComponent implements OnInit {
-  // newFormYn="N";
-  // newBtnCloseYn="N";
 
   newMode = "N";
   updateMode = "N";
@@ -44,5 +44,15 @@ export class DeptComponent implements OnInit {
     this.newMode = "N";
     this.updateMode = "Y";
     this.selectedDept = dept;
+  }
+
+  add(form: NgForm) {
+    const dept = Object.assign({ done: false }, form.value);
+    this.deptService.add(dept).subscribe(
+      dept => {
+        this.depts.push(dept);
+        form.reset();
+      }
+    );
   }
 }
