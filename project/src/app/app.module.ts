@@ -20,6 +20,7 @@ import { NewnoteComponent } from './note/newnote/newnote.component';
     DeptComponent,
     DocComponent,
     NoteComponent,
+    NewnoteComponent,
     EmpComponent,
     TreeComponent,
     OrgChartComponent
