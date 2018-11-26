@@ -1,6 +1,7 @@
-<ul *ngIf="orgs && orgs.length">
-  <li *ngFor="let org of orgs">
-    {{org.name}}
-    <ui-tree *ngIf="org.sub.length" [orgs]="org.sub"></ui-tree>
+<ul (dragover)="allow(org,$event)" (drop)="drop(org,$event)">
+  <li *ngFor="let o of orgs" draggable="true"
+       (dragstart)="drag(o,$event)">
+    {{o.name}}
+    <ui-tree [org]="o" [orgs]="o.sub"></ui-tree>
   </li>
 </ul>

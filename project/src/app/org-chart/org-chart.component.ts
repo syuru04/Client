@@ -9,9 +9,10 @@ import { Org } from './org-chart.model';
 })
 export class OrgChartComponent implements OnInit {
   orgs: Org[];
+  org: Org;
 
   ngOnInit() { 
-    this.service.get().subscribe(org => this.orgs = [org]);
+    this.service.get().subscribe(org => this.orgs = [this.org = org]);
   }
   constructor(private service: OrgChartService) {}
 }

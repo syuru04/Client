@@ -8,4 +8,19 @@ import { Org } from '../org-chart.model';
 })
 export class TreeComponent {
   @Input() orgs: Org[];
+  @Input() org: Org;
+
+  drag(o, e) {
+    e.dataTransfer.setData("text", e.target);
+  }
+
+  drop(o, e) {
+    e.preventDefault();
+    var data = e.dataTransfer.getData("text");
+    e.target.appendChild(data);
+  }
+
+  allow(o, e) {
+    e.preventDefault();
+  }
 }
