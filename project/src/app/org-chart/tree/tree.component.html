@@ -1,6 +1,6 @@
-<ul *ngIf="items.length">
-  <li *ngFor="let item of items">
-    {{item.name}}
-    <ui-tree *ngIf="item[key].length" [key]="key" [data]="item[key]"></ui-tree>
+<ul *ngIf="orgs && orgs.length">
+  <li *ngFor="let org of orgs">
+    {{org.name}}
+    <ui-tree *ngIf="org.sub.length" [orgs]="org.sub"></ui-tree>
   </li>
 </ul>

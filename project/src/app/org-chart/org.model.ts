@@ -1,5 +1,5 @@
 export class Org {
-    // id: number;
+    id: number;
     name: string;
     sub: Org[];
 }

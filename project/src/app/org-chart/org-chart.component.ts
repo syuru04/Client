@@ -8,15 +8,10 @@ import { Org } from './org-chart.model';
   styleUrls: ['./org-chart.component.css']
 })
 export class OrgChartComponent implements OnInit {
-  org: Org;
-  key: string = 'sub';
-  data: Array<Org> = [this.org];
-  
-  constructor(private service: OrgChartService) {}
+  orgs: Org[];
 
   ngOnInit() { 
-    this.service.get().subscribe(data => this.org = data);
-
-
-  } 
+    this.service.get().subscribe(org => this.orgs = [org]);
+  }
+  constructor(private service: OrgChartService) {}
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Org } from '../org-chart.model';
 
 @Component({
   selector: 'ui-tree',
@@ -6,6 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./tree.component.css']
 })
 export class TreeComponent {
-  @Input('key') key: string;
-  @Input('data') items: object[];
+  @Input() orgs: Org[];
 }
