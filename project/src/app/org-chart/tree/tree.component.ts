@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { OrgHttpService } from '../org-http.service';
+import { Dept } from '../../Dept/dept.model';
 import { Org } from '../org-chart.model';
 
 @Component({
@@ -7,25 +9,30 @@ import { Org } from '../org-chart.model';
   styleUrls: ['./tree.component.css']
 })
 export class TreeComponent {
-  @Input() orgs: Org[];
+  constructor(private service: OrgHttpService) {}
   @Input() org: Org;
+  @Input() orgs: Org[];
+  @Output() orgMove = new EventEmitter<{id: number, o: Org}>();
 
-  drag(o, e) {
+  drag(e) {
     e.stopPropagation();
-    console.log("drag",o,e);
-    e.dataTransfer.setData("text", e.target);
+    e.dataTransfer.setData("id", e.target.id);
   }
 
-  drop(o, e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    console.log("drop", data, o, e);
-    e.target.appendChild(data);
+  drop(e, o) {
+    e.stopPropagation();
+    let id = e.dataTransfer.getData("id");
+    var node = document.getElementById(id);
+    if (!node.contains(e.target)) {
+      e.preventDefault();
+      this.service.update({id, upId: e.target.id} as Dept).subscribe(() => 0);
+      this.orgMove.emit({id, o});
+      e.target.getElementsByTagName("UL")[0].appendChild(node);
+    }
   }
 
-  allow(o, e) {
+  allow(e) {
+    e.stopPropagation();
     e.preventDefault();
-    var data = e.dataTransfer.getData("text");
-    console.log("allow","("+data+")", o,e);
   }
 }

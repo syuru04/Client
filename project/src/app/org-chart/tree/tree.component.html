@@ -1,6 +1,6 @@
-<ul (dragover)="allow(org,$event)" (drop)="drop(org,$event)">
-  <li *ngFor="let o of orgs" draggable="true"
-       (dragstart)="drag(o,$event)">
+<ul>
+  <li *ngFor="let o of orgs" draggable="true" (dragstart)="drag($event)"
+          id="{{o.id}}" (dragover)="allow($event)" (drop)="drop($event,o)">
     {{o.name}}
     <ui-tree [org]="o" [orgs]="o.sub"></ui-tree>
   </li>
