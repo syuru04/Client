@@ -1,6 +1,9 @@
 export class Note {
     id: number;
-    title: string;    
+    title: string;  
+    body : string;  
+    author : number;
     name: string; 
-    stamp: string;
+    ts : string;
+   
 }

@@ -1,9 +1,7 @@
-import { Component, OnInit ,Output ,EventEmitter } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 
 import { Note } from './note.model';
 import { NoteService } from './note-http.service';
-import { NoteBodyComponent} from './note-body/note-body.component';
-
 
 
 @Component({
@@ -12,18 +10,26 @@ import { NoteBodyComponent} from './note-body/note-body.component';
   styleUrls: ['./note.component.css']
 })
 
-export class NoteComponent implements OnInit {    
+export class NoteComponent implements OnInit {
+
+  BodyFormYn = "N";
+
   notes: Note[];
-  constructor(private noteService: NoteService) { }  
-  id : Number;  
-  btnTitle_click(id: Number) {    
-    this.id = id;        
-    console.log(id);    
-  }
+  note:Note;
+  constructor(private service: NoteService) { }
+
   ngOnInit() {
-    this.noteService.get("").subscribe(data => {
-      this.notes = data;      
+    this.service.get().subscribe(data => {
+      this.notes = data;
     });
-  }  
+  }
+  btnListClick() :void{
+    this.BodyFormYn="N"
+  }
+  btnTitleClick(id): void {
+
+    this.BodyFormYn="Y";
+    this.service.get2(id).subscribe(data =>this.note = data);
+  }
 }
 

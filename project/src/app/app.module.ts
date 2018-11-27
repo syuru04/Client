@@ -11,8 +11,8 @@ import { NoteComponent } from './note/note.component';
 import { EmpComponent } from './emp/emp.component';
 import { OrgChartComponent } from './org-chart/org-chart.component';
 import { TreeComponent } from './org-chart/tree/tree.component';
-import { NoteBodyComponent } from './note/note-body/note-body.component';
 import { NewnoteComponent } from './note/newnote/newnote.component';
+import { NoteService } from './note/note-http.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { NewnoteComponent } from './note/newnote/newnote.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [NoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
