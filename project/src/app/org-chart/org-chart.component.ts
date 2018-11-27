@@ -8,13 +8,12 @@ import { Org } from './org-chart.model';
   styleUrls: ['./org-chart.component.css']
 })
 export class OrgChartComponent implements OnInit {
-  org: Org;
   orgs: Org[];
 
   constructor(private service: OrgHttpService) {}
 
   get(): void {
-    this.service.get().subscribe(org => this.orgs = [this.org = org]);
+    this.service.get().subscribe(org => this.orgs = [org]);
   }
 
   ngOnInit() {
@@ -22,7 +21,9 @@ export class OrgChartComponent implements OnInit {
   }
 
   orgChange({id, o}): void {
-    o.sub.push(OrgChartComponent.removeFrom(this.org, id));
+    o.sub.push(OrgChartComponent.removeFrom(this.orgs[0], id));
+    console.log("--------------");
+    
   }
 
   private static removeFrom(o: Org, id: number): Org {
