@@ -1,3 +1,24 @@
-<p>
-  doc works!
+<p class="text-right">
+  <a class="btn btn-success btn-sm" id="btn_new" routerLink="../doc/newDoc">결재등록</a>
 </p>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="active">
+        <th>작성부서</th>
+        <th style="width:50%">제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of docs">
+        <td>{{doc.deptName}}</td>
+        <td><a (click)="btnTitleClick(note.id)">{{doc.title}}</a></td>
+        <td>{{doc.authorName}}</td>
+        <td>{{doc.ts}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

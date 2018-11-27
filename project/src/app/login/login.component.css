@@ -1,0 +1,10 @@
+.out {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.in {
+    display: inline-block;
+    width: 30%;
+}

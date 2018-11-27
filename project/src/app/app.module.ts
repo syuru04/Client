@@ -13,6 +13,8 @@ import { OrgChartComponent } from './org-chart/org-chart.component';
 import { TreeComponent } from './org-chart/tree/tree.component';
 import { NewnoteComponent } from './note/newnote/newnote.component';
 import { NoteService } from './note/note-http.service';
+import { NewDocComponent } from './doc/new-doc/new-doc.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { NoteService } from './note/note-http.service';
     NewnoteComponent,
     EmpComponent,
     TreeComponent,
-    OrgChartComponent
+    OrgChartComponent,
+    NewDocComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
