@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrgHttpService } from './org-http.service';
-import { Org } from './org-chart.model';
+import { Dept } from './Dept.model';
+import { Emp } from '../emp/emp.model';
 
 @Component({
   selector: 'app-org-chart',
@@ -8,12 +9,17 @@ import { Org } from './org-chart.model';
   styleUrls: ['./org-chart.component.css']
 })
 export class OrgChartComponent implements OnInit {
-  orgs: Org[];
-
   constructor(private service: OrgHttpService) {}
+  orgs: Dept[];
+  emps: Emp[];
+  dept: Dept;
+  chief: Emp;
 
   get(): void {
-    this.service.get().subscribe(org => this.orgs = [org]);
+    this.service.get().subscribe(org => {
+      this.orgs = [org];
+      this.listMembers(org);
+    });
   }
 
   ngOnInit() {
@@ -22,11 +28,9 @@ export class OrgChartComponent implements OnInit {
 
   orgChange({id, o}): void {
     o.sub.push(OrgChartComponent.removeFrom(this.orgs[0], id));
-    console.log("--------------");
-    
   }
 
-  private static removeFrom(o: Org, id: number): Org {
+  private static removeFrom(o: Dept, id: number): Dept {
     let i = o.sub.findIndex(p => p.id == id);
     if (i < 0) {
       return o.sub.splice(i, 1)[0];
@@ -35,5 +39,16 @@ export class OrgChartComponent implements OnInit {
       if (s = this.removeFrom(s, id)) return s;
     }
     return null;
+  }
+
+  listMembers(o: Dept) {
+     this.service.getMembers(o.id).subscribe(emps => {
+      this.dept = o;
+      this.emps = emps;
+      this.chief = o.chief ? emps.find(e => e.id == o.chief) : null;
+      if (!this.chief) {
+        this.chief = emps.length ? { name: "", code: ""} as Emp : null;
+      }
+    });
   }
 }

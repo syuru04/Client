@@ -1,3 +1,19 @@
 <div>
   <ui-tree [orgs]="orgs" (onOrgMove)="orgChange($event)"></ui-tree>
 </div>
+
+<div class="container">
+  <table class="table">
+    <tr *ngIf="chief">
+      <td>{{chief.name}}</td>
+      <td>{{chief.code}}</td>
+      <td colspan="2">{{dept.name}}장</td>
+    </tr>
+    <tr *ngFor="let e of emps">
+      <td>{{e.name}}</td>
+      <td>{{e.code}}</td>
+      <td>{{e.phone}}</td>
+      <td>{{e.email}}</td>
+    </tr>
+  </table>
+</div>

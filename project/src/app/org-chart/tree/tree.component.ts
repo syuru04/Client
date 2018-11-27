@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { OrgHttpService } from '../org-http.service';
 import { Dept } from '../../Dept/dept.model';
 import { Org } from '../org-chart.model';
+import { OrgChartComponent } from '../org-chart.component'
 
 @Component({
   selector: 'ui-tree',
@@ -9,7 +10,7 @@ import { Org } from '../org-chart.model';
   styleUrls: ['./tree.component.css']
 })
 export class TreeComponent {
-  constructor(private service: OrgHttpService) {}
+  constructor(private service: OrgHttpService, private parent: OrgChartComponent) {}
   @Input() orgs: Org[];
   @Output() onOrgMove = new EventEmitter<{id: number, o: Org}>();
 
@@ -33,5 +34,11 @@ export class TreeComponent {
   allow(e) {
     e.stopPropagation();
     e.preventDefault();
+  }
+
+  click(e,o) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.parent.listMembers(o);
   }
 }
