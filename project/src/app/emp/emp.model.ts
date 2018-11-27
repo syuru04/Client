@@ -1,8 +1,9 @@
 export class Emp {
-    id:number;
+    id: number;
+    deptId: number;
+    name: string;
     code: string;
     pw: string;
-    name: string;
     phone: string;
     email: string;
     deptName: string;

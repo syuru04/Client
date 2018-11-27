@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { DeptService } from './dept-http.service';
 import { Dept } from './dept.model';
@@ -9,28 +10,45 @@ import { Dept } from './dept.model';
   styleUrls: ['./dept.component.css']
 })
 export class DeptComponent implements OnInit {
-  newFormYn="N";
-  newBtnCloseYn="N";
+
+  newMode = "N";
+  updateMode = "N";
+  openForm = "N";
 
   depts: Dept[];
+  selectedDept: Dept;
 
-  constructor(private deptService: DeptService) { 
-    
-  }
+  constructor(private deptService: DeptService) {}
 
   ngOnInit() { 
-    this.deptService.get().subscribe(data => {
-      this.depts = data;
-    });
+    this.deptService.get().subscribe(data => this.depts = data);
   } 
 
   btnNew_click() : void {
-    this.newFormYn="Y";
-    this.newBtnCloseYn = "Y";
+    this.openForm = "Y";
+    this.newMode = "Y";
   }
 
   btnCancel_click() : void {
-    this.newFormYn="N";
-    this.newBtnCloseYn = "N";
+    this.openForm = "N";
+    this.newMode = "N";
+    this.updateMode = "N";
+  }  
+
+  onSelect(dept : Dept): void {
+    this.openForm = "Y";
+    this.newMode = "N";
+    this.updateMode = "Y";
+    this.selectedDept = dept;
+  }
+
+  add(form: NgForm) {
+    const dept = Object.assign({ done: false }, form.value);
+    this.deptService.add(dept).subscribe(
+      dept => {
+        this.depts.push(dept);
+        form.reset();
+      }
+    );
   }
 }

@@ -1,75 +1,72 @@
-<form class="form-horizontal">
-  <div class="well bs-component" *ngIf="newFormYn=='Y'">
-    <fieldset>
-      <div class="row"> 
-        <div class="form-group">
-          <label class="col-lg-2 control-label">아이디</label>
-          <div class="col-lg-3">                              
-            <input type="text" class="form-control" id="" name=""/>
+<div *ngIf="openForm=='Y'">
+  <form #f="ngForm" (ngSubmit)="update(f)" class="form-horizontal">
+    <div class="well bs-component">
+      <fieldset>
+        <div class="row"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label">아이디</label>
+            <div class="col-lg-3">                              
+              <input type="text" class="form-control" name="code" [value]="selectedEmp.code" [ngModel]="f.value.code"  />
+            </div>
+            <label class="col-lg-2 control-label">이름</label>
+            <div class="col-lg-3">
+              <input type="text" class="form-control" name="name" [ngModel]="f.value.name" [value]="selectedEmp.name" />
+            </div>                          
           </div>
-          <label class="col-lg-2 control-label">이름</label>
-          <div class="col-lg-3">
-            <input type="text" class="form-control" id="" name="" />
-          </div>                          
         </div>
-      </div>
 
-      <div class="row"> 
-        <div class="form-group">
-          <label class="col-lg-2 control-label">연락처</label>
-          <div class="col-lg-3">                              
-            <input type="text" class="form-control" id="" name="" placeholder="핸드폰번호(숫자만 입력)"  />
+        <div class="row"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label">연락처</label>
+            <div class="col-lg-3">                              
+              <input type="text" class="form-control" name="phone" [ngModel]="f.value.phone" [value]="selectedEmp.phone" placeholder="010-0000-0000"  />
+            </div>
+            <label class="col-lg-2 control-label">이메일</label>
+            <div class="col-lg-4">
+              <input type="text" class="form-control" name="email" [ngModel]="f.value.email" [value]="selectedEmp.email" placeholder="example@kr.com"  />
+            </div>                          
           </div>
-          <label class="col-lg-2 control-label">이메일</label>
-          <div class="col-lg-4">
-            <input type="text" class="form-control" id="" name="" placeholder="example@kr.com"  />
-          </div>                          
         </div>
-      </div>
 
-      <div class="row"> 
-        <div class="form-group">
-          <label class="col-lg-2 control-label">부서</label>
-          <div class="col-lg-3">                              
-            <select class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
-          </div>                                  
+        <div class="row"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label">부서</label>
+            <div class="col-lg-3">                              
+              <select class="form-control" name="deptId" [ngModel]="f.value.deptId">
+                <option *ngFor="let dept of depts" [value]="dept.id" [selected]="selectedEmp.deptId==dept.id?true:null">{{dept.name}}</option>               
+              </select>
+            </div>                                  
+          </div>
         </div>
-      </div>
-      <p class="text-right">
-        <a class="btn btn-success btn-sm" id="btn_del">삭제</a>&nbsp;
-        <a class="btn btn-primary btn-sm" id="btn_mod">수정</a>&nbsp;
-        <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel_click()">닫기</a> 
-      </p>
-    </fieldset>
-  </div>
-  
+        <p class="text-right">
+          <a class="btn btn-success btn-sm" id="btn_del" (click)="remove(selectedEmp.id)">삭제</a>&nbsp;
+          <button type="submit" class="btn btn-primary btn-sm" id="btn_mod">수정</button>&nbsp;
+          <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel_click()">닫기</a> 
+        </p>
+      </fieldset>
+    </div>  
+  </form>
+</div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr class="active">
-          <th>번호</th>
-          <th>ID</th>
-          <th>이름</th>
-          <th>연락처</th>
-          <th>이메일</th>
-          <th>부서</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let emp of emps">        
-          <td>{{emp.id}}</td>
-          <td>{{emp.code}}</td>
-          <td><a (click)="updateInfo()"  >{{emp.name}}</a></td>
-          <td>{{emp.phone}}</td>
-          <td>{{emp.email}}</td>
-          <td>{{emp.deptName}}</td>
-        </tr>       
-      </tbody>       
-    </table>
-  </div>
-</form>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="active">
+        <th>ID</th>
+        <th>이름</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>부서</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of emps; index as i">
+        <td><a (click)="onSelect(emp, i)">{{emp.code}}</a></td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.phone}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.deptName}}</td>
+      </tr>
+    </tbody>       
+  </table>
+</div>
