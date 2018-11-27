@@ -47,8 +47,30 @@ export class OrgChartComponent implements OnInit {
       this.emps = emps;
       this.chief = o.chief ? emps.find(e => e.id == o.chief) : null;
       if (!this.chief) {
-        this.chief = emps.length ? { name: "", code: ""} as Emp : null;
+        this.chief = emps.length ? { name: "", id: 0 } as Emp : null;
       }
     });
+  }
+  
+  appoint(e) {
+
+  }
+
+  relieve(e) {
+
+    // this.service.update({ id, chief } as Dept).subscribe(org => {
+    //   this.orgs = [org];
+    //   this.listMembers(org);
+    // });
+  }
+
+  drag(e) {
+    e.stopPropagation();
+    e.dataTransfer.setData("id", e.target.id);
+  }
+
+  allow(e) {
+    e.stopPropagation();
+    e.preventDefault();
   }
 }
