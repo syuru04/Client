@@ -1,0 +1,36 @@
+<form id="frmForm" name="frmForm" class="form-horizontal">
+  <div class="control-group" id="fields">
+    <div class="controls">
+      <div class="well bs-component">
+        <div class="form-group">
+          <label class="col-lg-2 control-label">전결</label>
+          <div class="col-lg-8">
+            <label class="radio-label">
+              <input class="radioBtn" type="radio" name="finalUser" value="">기안자 &nbsp;&nbsp;
+              <input class="radioBtn" type="radio" name="finalUser" value="">기안자 &nbsp;&nbsp;
+              <input class="radioBtn" type="radio" name="finalUser" value="">기안자
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-lg-2 control-label">제목</label>
+          <div class="col-lg-8">
+            <input type="text" class="form-control" id="title" name="title" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="textArea" class="col-lg-2 control-label">내용</label>
+          <div class="col-lg-8">
+            <textarea class="form-control" rows="10" id="cont" name="cont" style="resize: none;"></textarea>
+          </div>
+        </div>
+        <p class="text-right">
+          <a class="btn btn-default btn-sm" id="btn_cancel" routerLink="../../doc">취소</a>&nbsp;
+          <a class="btn btn-primary btn-sm" id="btn_new">등록</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

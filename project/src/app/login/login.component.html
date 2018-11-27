@@ -1,0 +1,38 @@
+<div class="out">
+  <div class="in">
+
+    <h1 class="text-info">
+      TopCredu Login
+    </h1>
+
+    <form class="form-horizontal" (ngSubmit)="f.form.valid && login()" #f="ngForm" name="form">
+      <div class="well bs-component">
+        <fieldset>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">아이디</label>
+              <div class="col-lg-6">                              
+                <input type="text" class="form-control" [(ngModel)]="user.id" name="id" #id="ngModel" required/>
+              </div>                     
+            </div>
+          </div>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">패스워드</label>
+              <div class="col-lg-6">
+                <input type="password" class="form-control" [(ngModel)]="user.pw" name="pw" #pw="ngModel" required/>
+              </div>                          
+            </div>
+          </div>
+          <div class="">
+            <h5 class="text-danger">{{errorMessage}}</h5>
+          </div>
+          <p class="text-center">
+            <a class="btn btn-success btn-sm">회원가입</a>&nbsp;
+            <button type="submit" class="btn btn-primary btn-sm">로그인</button>
+          </p>
+        </fieldset>
+      </div>  
+    </form>
+  </div>
+</div>

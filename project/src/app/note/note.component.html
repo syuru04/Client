@@ -23,13 +23,13 @@
       </table>
       <!-- 게시판 버튼 -->
       <p class="text-right" style="margin-top: 10px">
-        <a class="btn btn-default btn-sm" id="btn_del" href="#" onclick="">삭제</a>&nbsp;
-        <a class="btn btn-primary btn-sm" id="btn_mod" href="#" onclick="">수정</a>&nbsp;
+        <a class="btn btn-default btn-sm" id="btn_del" (click)="remove(note.id)">삭제</a>&nbsp;
+        <a class="btn btn-primary btn-sm" id="btn_mod" >수정</a>&nbsp;
         <a class="btn btn-default btn-sm" id="btn_list" (click)="btnListClick()">목록</a>
       </p>
     </div>  
 
-
+<div *ngIf="ListFormYn=='Y'">
   <p class="text-right">
     <a class="btn btn-success btn-sm" id="btn_new" routerLink="../note/newnote">글작성</a>
   </p>
@@ -51,4 +51,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>
