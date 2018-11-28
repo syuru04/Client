@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { OrgHttpService } from '../org-http.service';
 import { Dept } from '../../Dept/dept.model';
-import { Org } from '../org-chart.model';
 import { OrgChartComponent } from '../org-chart.component'
 
 @Component({
@@ -11,8 +10,8 @@ import { OrgChartComponent } from '../org-chart.component'
 })
 export class TreeComponent {
   constructor(private service: OrgHttpService, private parent: OrgChartComponent) {}
-  @Input() orgs: Org[];
-  @Output() onOrgMove = new EventEmitter<{id: number, o: Org}>();
+  @Input() orgs: Dept[];
+  @Output() onOrgMove = new EventEmitter<{id: number, o: Dept}>();
 
   drag(e) {
     e.stopPropagation();

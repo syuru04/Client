@@ -52,8 +52,8 @@ export class OrgChartComponent implements OnInit {
     });
   }
   
-  appoint(e) {
-
+  appoint(e, emp) {
+    console.log(e.target.parent);
   }
 
   relieve(e) {

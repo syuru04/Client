@@ -10,7 +10,7 @@
       <td colspan="3">{{dept.name}}장</td>
     </tr>
     <tr *ngFor="let e of emps" id="m_{{e.id}}" draggable="true" (dragstart)="drag($event)">
-      <td><input type='radio' name="chief" [checked]="e.id==chief.id" (click)="appoint($event)" title="부서장"></td>
+      <td><input type='radio' name="chief" [checked]="e.id==chief.id" (click)="appoint($event,e)" title="부서장"></td>
       <td>{{e.name}}</td>
       <td>{{e.code}}</td>
       <td>{{e.phone}}</td>
