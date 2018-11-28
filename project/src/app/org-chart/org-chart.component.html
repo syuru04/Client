@@ -6,11 +6,11 @@
       </div>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-8" *ngIf="emps && emps.length">
       <h4 id="emp_list_header" (click)="relieve()">
         {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
       </h4>
-      <table class="table table-striped table-responsive">
+      <table class="table table-responsive">
         <tr *ngFor="let e of emps" id="m_{{e.id}}"
             [class.sub]="e.deptId != dept.id"
             [draggable]="e.deptId == dept.id && e.id != dept.chief"

@@ -39,7 +39,8 @@ export class OrgChartComponent implements OnInit {
   // 부서장 임명
   appoint(emp: Emp) {
     if (emp.id != this.dept.chief) {
-      this.orgHttp.update({id: this.dept.id, chief: emp.id} as Dept).subscribe(() => {
+      const id = this.dept.id;
+      this.orgHttp.update({ id, chief: emp.id } as Dept).subscribe(() => {
         this.dept.chief = emp.id;
         this.dept.chiefName = emp.name;
       });

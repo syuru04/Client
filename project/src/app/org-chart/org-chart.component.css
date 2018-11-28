@@ -5,8 +5,8 @@ tr {
   cursor: move;
 }
 #emp_list_header {
-  margin: 0 0 5px 50px;
+  margin: 0 0 5px 28px;
 }
 .sub {
-  background-color: silver;
+  background-color: beige;
 }

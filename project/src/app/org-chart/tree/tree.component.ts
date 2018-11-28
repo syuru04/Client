@@ -23,19 +23,17 @@ export class TreeComponent {
 
   drop(e, o) {
     e.stopPropagation();
+    e.preventDefault();
     let id = e.dataTransfer.getData("id");
     var node = document.getElementById(id);
-    if (!node.contains(e.target)) {
-      e.preventDefault();
-      if (id[0] == 'm') {
-        this.parent.transfer(id.substr(2), o, node);
-      } else {
-        this.parent.moveDept(id, o, node, e.target.getElementsByTagName("UL")[0]);
-      }
+    if (id[0] == 'm') {
+      this.parent.transfer(id.substr(2), o, node);
+    } else if (!node.contains(e.target)) {
+      this.parent.moveDept(id, o, node, e.target.lastChild.lastChild);
     }
   }
 
-  click(e,o) {
+  click(e, o) {
     e.stopPropagation();
     e.preventDefault();
     this.parent.getEmps(o);
