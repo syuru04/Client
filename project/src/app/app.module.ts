@@ -15,6 +15,7 @@ import { NewnoteComponent } from './note/newnote/newnote.component';
 import { NoteService } from './note/note-http.service';
 import { NewDocComponent } from './doc/new-doc/new-doc.component';
 import { LoginComponent } from './login/login.component';
+import { JoinComponent } from './join/join.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     TreeComponent,
     OrgChartComponent,
     NewDocComponent,
-    LoginComponent
+    LoginComponent,
+    JoinComponent
   ],
   imports: [
     BrowserModule,
