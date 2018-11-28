@@ -1,8 +1,20 @@
+<<<<<<< HEAD
+<div *ngIf="loginProc=='join'">
+  <app-join (outputProperty)="outputEvent($event)"></app-join>
+</div>
+
+<div *ngIf="loginProc=='login'">
+  <app-login (outputProperty)="outputEvent($event)"></app-login>
+</div>
+
+<div *ngIf="loginProc=='loginSuccess'" class="container" style="margin-top: 20px">
+=======
 <!-- <div *ngIf="loginYN=='N'">
   <app-login></app-login>
 </div> -->
 
 <div  class="container" style="margin-top: 20px"><!-- *ngIf="loginYN=='Y'" -->
+>>>>>>> d2102bd65001465996a6b0a0d856106e86a380e4
   <div class="bs-docs-section clearfix">
     <div class="row">
       <div class="col-lg-12">
@@ -28,7 +40,7 @@
                   <li routerLinkActive="active"><a routerLink="emp">사원관리</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a onclick="f_logout()" style="cursor: pointer;">로그아웃</a></li>  
+                  <li><a style="cursor: pointer;" (click)="logOut()">로그아웃</a></li>  
                 </ul>	 
               </div>
             </div>   

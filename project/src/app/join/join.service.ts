@@ -11,28 +11,14 @@ const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LoginService {
+@Injectable({providedIn: 'root'})
+export class JoinService {
   constructor(private http: HttpClient) { }
 
-  // auth(user): Promise<any> {
-  //   return axios.get(this.URL + user.id)
-  //     .then(function(response) {
-  //       console.log(response);
-  //       return response.data;
-  //     });
-  // }
-  
-  pwChk(id:string, pw:string): Observable<any> {
-    return this.http.post<Boolean>(URL+'pw', [id, pw], HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('pwChk'))
+  add(emp: Emp): Observable<Emp> {
+    return this.http.post<Emp>(URL, emp, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('add'))
     );
-  }
-
-  getEmp(id:string): Observable<Emp[]> {
-    return this.http.post<Emp[]>(URL+'c/', id, HTTP_OPTIONS);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
@@ -43,5 +29,3 @@ export class LoginService {
     };
   }
 }
-
-
