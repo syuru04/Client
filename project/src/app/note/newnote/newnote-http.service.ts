@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Note } from './newnote.model';
+import { Note, Note2 } from './newnote.model';
 import { catchError } from 'rxjs/operators';
 
 
@@ -16,19 +16,21 @@ const HTTP_OPTIONS = {
 @Injectable({ providedIn: 'root' })
 
 export class NewNoteService {
-  notes: Note[];
-  note : Note;
+    
   constructor(private http: HttpClient) { }
   
   get(): Observable<Note[]> {
     return this.http.get<Note[]>(URL);
   }
+  get2(id): Observable<Note> {
+    return this.http.get<Note>(URL + id);
+  }
   
-  add(title:string,body:string,name:string,ts:string): Observable<Note[]> {   
-    return this.http.post<Note[]>(URL, this.notes, HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('add'))
+  add(note: Note2): Observable<any> {
+    return this.http.post<Note2>(URL, note, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('insert'))
     );
-  }  
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

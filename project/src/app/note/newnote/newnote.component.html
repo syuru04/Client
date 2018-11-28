@@ -5,29 +5,32 @@
       <div class="controls">
         <div class="well bs-component">
           
-          <div>            
-            <input type="text" id="name" name="name" value="김길동" [ngModel]="name" />   
-            <input type="text" id="ts" name="ts" value="2018-01-07 14:25:02" [ngModel]="ts"/>   
+          <div ng-app="myApp" ngControl="myCtrl">            
+            <input type="text" id="author" name="author" [ngModel]="author" value={{note?.author}}/>   
+            <!-- value="1" -->
+            <input type="text" id="ts" name="ts" [ngModel]="ts">
+            <!-- value="2018-01-07 14:25:02" -->
           </div>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">제목</label>
             <div class="col-lg-8">
-              <input type="text" class="form-control" id="title" name="title" [ngModel]="title"/>
+              <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}}/>              
             </div>
           </div>
           <div class="form-group">
-            <label for="textArea" class="col-lg-2 control-label">내용</label>
+            <label for="textArea" class="col-lg-2 control-label">내용</label>            
             <div class="col-lg-8">
-              <textarea class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body"></textarea>
+              <textarea class="form-control" rows="10" id="body" name="body" style="resize: none" [ngModel]="body" value={{note?.body}} ></textarea>              
             </div>
           </div>
           <p class="text-right">
-            <a class="btn btn-default btn-sm" id="btn_cancel" routerLink="../../note">취소</a>
-            <button type="submit" class="btn btn-primary btn-sm" id="btn_new" >등록</button>
+            <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel()">취소</a>
+            <button type="submit" class="btn btn-primary btn-sm" id="btn_new">등록</button>
           </p>
         </div>
       </div>
-    </div>
-  </form>
+    </div>    
+  </form>  
 </div>
+

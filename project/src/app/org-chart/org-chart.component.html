@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="bs-docs-section">
   <div class="row">
 
@@ -31,3 +32,26 @@
 
 
 
+=======
+<div>
+  <ui-tree [orgs]="orgs"></ui-tree>
+</div>
+
+<div class="container" *ngIf="emps && emps.length">
+    <h4 id="emp_list_header" (click)="relieve()">
+      {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
+    </h4>
+    <table class="table">
+        <tr *ngFor="let e of emps" id="m_{{e.id}}"
+            [class.sub]="e.deptId != dept.id"
+            [draggable]="e.deptId == dept.id && e.id != dept.chief"
+            (dragstart)="drag($event)" (click)="appoint(e)">
+      <td><input type='radio' name="chief" title="리더"
+            [checked]="e.id == dept.chief"> &nbsp; {{e.name}}</td>
+      <td>{{e.code}}</td>
+      <td>{{e.phone}}</td>
+      <td>{{e.email}}</td>
+    </tr>
+  </table>
+</div>
+>>>>>>> d2102bd65001465996a6b0a0d856106e86a380e4

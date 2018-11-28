@@ -1,3 +1,12 @@
 tr {
   cursor: pointer;
 }
+[draggable="true"] {
+  cursor: move;
+}
+#emp_list_header {
+  margin: 0 0 5px 50px;
+}
+.sub {
+  background-color: silver;
+}
