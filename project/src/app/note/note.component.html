@@ -6,7 +6,7 @@
           <th >작성자</th>
           <td>{{note?.name}}</td>
           <th >작성일</th>
-          <td >{{note?.ts}}</td>
+          <td >{{note?.ts | date:'yyyy년 MM월 dd일 HH시 mm분 ss초'}}</td>
         </tr>        
         <tr style="text-align:left">
             <th >제목</th>
@@ -36,20 +36,21 @@
   <table class="table table-bordered">
     <thead>
       <tr class="active">
-        <th class="col-lg-1">번호</th>
+        <th class="col-lg-1">글번호</th>
         <th class="col-lg-7">제목</th>
         <th class="col-lg-2">작성자</th>
         <th class="col-lg-2">등록일</th>
       </tr>
     </thead>
+    
     <tbody>
       <tr *ngFor="let note of notes">
         <td>{{note.id}}</td>
         <td><a (click)="btnTitleClick(note.id)">{{note.title}}</a></td>
         <td>{{note.name}}</td>
-        <td>{{note.stamp}}</td>
+        <td type="date">{{note.ts | date:'yy.MM.dd HH:mm:ss'}}</td>
       </tr>
-    </tbody>
-  </table>
+    </tbody>   
+  </table>  
 </div>
 </div>

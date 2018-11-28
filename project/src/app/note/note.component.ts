@@ -11,6 +11,7 @@ import { NoteService } from './note-http.service';
 })
 
 export class NoteComponent implements OnInit {
+  today = new Date();
 
   BodyFormYn = "N";
   ListFormYn = "Y";
@@ -33,22 +34,6 @@ export class NoteComponent implements OnInit {
     this.BodyFormYn="Y";
     this.service.get2(id).subscribe(data =>this.note = data);
   }
-
-  // add(form: NgForm) {
-  //   const todo = Object.assign({ done: false }, form.value);
-  //   todo.title = todo.title.trim();
-  //   this.todoHttpService.add(todo).subscribe(
-  //     todo => {
-  //       this.todos.push(todo);
-  //       form.reset();
-  //     }
-  //   );
-  // }
-
-  // setDone(todo: Todo) {
-  //   todo.done = !todo.done;
-  //   this.service.update(todo).subscribe();
-  // }
 
   remove(id: number) {
     alert("Delete ?");
