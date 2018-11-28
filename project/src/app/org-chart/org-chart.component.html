@@ -1,43 +1,36 @@
-<<<<<<< HEAD
 <div class="bs-docs-section">
   <div class="row">
-
     <div class="col-lg-3">
       <div>
-        <ui-tree [orgs]="orgs" (onOrgMove)="orgChange($event)"></ui-tree>
+        <ui-tree [orgs]="orgs"></ui-tree>
       </div>
     </div>
 
     <div class="col-lg-8">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <tr *ngIf="chief" class="success">
-            <td><input type='radio' name="chief" (click)="relieve($event)" title="해임"></td>
-            <td>{{chief.name}}</td>
-            <td colspan="3">{{dept.name}}장</td>
-          </tr>
-          <tr *ngFor="let e of emps" id="m_{{e.id}}" draggable="true" (dragstart)="drag($event)">
-            <td><input type='radio' name="chief" [checked]="e.id==chief.id" (click)="appoint($event,e)" title="부서장"></td>
-            <td>{{e.name}}</td>
-            <td>{{e.code}}</td>
-            <td>{{e.phone}}</td>
-            <td>{{e.email}}</td>
-          </tr>
-        </table>
-      </div>
+      <h4 id="emp_list_header" (click)="relieve()">
+        {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
+      </h4>
+      <table class="table table-striped table-responsive">
+        <tr *ngFor="let e of emps" id="m_{{e.id}}"
+            [class.sub]="e.deptId != dept.id"
+            [draggable]="e.deptId == dept.id && e.id != dept.chief"
+            (dragstart)="drag($event)" (click)="appoint(e)">
+          <td><input type='radio' name="chief" title="리더"
+                [checked]="e.id == dept.chief"> &nbsp; {{e.name}}</td>
+          <td>{{e.code}}</td>
+          <td>{{e.phone}}</td>
+          <td>{{e.email}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
 
-
-
-
-=======
-<div>
+<!--<div>
   <ui-tree [orgs]="orgs"></ui-tree>
 </div>
 
-<div class="container" *ngIf="emps && emps.length">
+ <div class="container" *ngIf="emps && emps.length">
     <h4 id="emp_list_header" (click)="relieve()">
       {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
     </h4>
@@ -53,5 +46,5 @@
       <td>{{e.email}}</td>
     </tr>
   </table>
-</div>
->>>>>>> d2102bd65001465996a6b0a0d856106e86a380e4
+</div> -->
+
