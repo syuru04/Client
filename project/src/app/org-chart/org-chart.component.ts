@@ -71,6 +71,7 @@ export class OrgChartComponent implements OnInit {
         emp.deptId = toDept.id;
         if (!OrgChartComponent.isSub(this.dept, toDept)) {
           node.remove();
+          this.deleteFromEmps(id);
         }
       });
     }
@@ -79,17 +80,46 @@ export class OrgChartComponent implements OnInit {
   // 부서 조직 구조 변경
   moveDept(id: number, o: Dept, node, target): void {
     this.orgHttp.update({id, upId: o.id} as Dept).subscribe(() => {
-      o.sub.push(OrgChartComponent.removeFrom(id, this.orgs[0]));
+      o.sub.push(this.deleteFromDepts(id));
       target.appendChild(node);
     });
   }
 
-  // o의 하위 부서들에서 부서 id를 찾아 그 부서를 제거하고 제거한 것을 넘긴다
-  private static removeFrom(id: number, o: Dept): Dept {
+  drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    const nodeId = e.dataTransfer.getData("id");
+    const node = document.getElementById(nodeId);
+    const id = nodeId.substr(2) as number;
+    if (nodeId[0] == 'e') {
+      this.empHttp.remove(id).subscribe(() => {
+        node.remove();
+        this.deleteFromEmps(id);
+      });
+    } else if (!node.contains(e.target)) {
+      console.log(node.lastChild.lastChild.childNodes.length);
+      // this.orgHttp.remove(id).subscribe(() => {
+      //   node.remove();
+      //   this.deleteFromDepts(id);
+      // });
+    }
+  }
+
+  deleteFromDepts(id: number): Dept {
+    return OrgChartComponent.removeFrom(this.orgs[0], id);
+  }
+
+  deleteFromEmps(id: number): void {
+    const i = this.emps.findIndex(e => e.id == id);
+    this.emps.splice(i, 1);
+  }
+
+  // o의 하위 부서들에서 부서 id를 찾아 제거하고 그것을 넘긴다
+  private static removeFrom(o: Dept, id: number): Dept {
     let i = 0;
     for (let s of o.sub) {
       if (s.id == id) return o.sub.splice(i, 1)[0];
-      if (s = this.removeFrom(id, s)) return s;
+      if (s = this.removeFrom(s, id)) return s;
       i++;
     }
     return null;
@@ -102,7 +132,6 @@ export class OrgChartComponent implements OnInit {
     }
     return false;
   }
-
   // private static removeFrom(id: number, o: Dept): Dept {
   //   const i = o.sub.findIndex(s => s.id == id);
   //   if (0 <= i) {

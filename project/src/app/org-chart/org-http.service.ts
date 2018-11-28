@@ -23,7 +23,11 @@ export class OrgHttpService {
     return this.http.put<Dept>(URL, dept, HTTP_OPTIONS);
   }
 
+  remove(id: number): Observable<any> {
+    return this.http.delete(URL + id);
+  }
+
   getMembers(id: number): Observable<Emp[]> {
-    return this.http.get<Emp[]>('http://localhost:8080/emps/m/'+id);
+    return this.http.get<Emp[]>('http://localhost:8080/emps/m/' + id);
   }
 }

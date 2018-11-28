@@ -24,10 +24,11 @@ export class TreeComponent {
   drop(e, o) {
     e.stopPropagation();
     e.preventDefault();
-    let id = e.dataTransfer.getData("id");
-    var node = document.getElementById(id);
-    if (id[0] == 'm') {
-      this.parent.transfer(id.substr(2), o, node);
+    const nodeId = e.dataTransfer.getData("id");
+    const node = document.getElementById(nodeId);
+    const id = nodeId.substr(2) as number;
+    if (nodeId[0] == 'e') {
+      this.parent.transfer(id, o, node);
     } else if (!node.contains(e.target)) {
       this.parent.moveDept(id, o, node, e.target.lastChild.lastChild);
     }

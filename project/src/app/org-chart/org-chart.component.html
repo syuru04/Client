@@ -1,21 +1,26 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-3">
-      <div>
-        <ui-tree [orgs]="orgs"></ui-tree>
-      </div>
+      <ui-tree [orgs]="orgs"></ui-tree>
     </div>
 
-    <div class="col-lg-8" *ngIf="emps && emps.length">
+    <div class="col-lg-8" *ngIf="dept && (!emps || !emps.length)">
       <h4 id="emp_list_header" (click)="relieve()">
-        {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
+        {{dept.name}}
+      </h4>
+    </div>
+    <div class="col-lg-8" *ngIf="emps && emps.length">
+      <h4 id="emp_list_header">
+        {{dept.name}}장 &nbsp; 
+        <span *ngIf="dept.chief" (click)="relieve()">{{dept.chiefName}}</span>
+        <span *ngIf="!dept.chief">(공석)</span>
       </h4>
       <table class="table table-responsive">
-        <tr *ngFor="let e of emps" id="m_{{e.id}}"
+        <tr *ngFor="let e of emps" id="e_{{e.id}}"
             [class.sub]="e.deptId != dept.id"
             [draggable]="e.deptId == dept.id && e.id != dept.chief"
-            (dragstart)="drag($event)" (click)="appoint(e)">
-          <td><input type='radio' name="chief" title="리더"
+            (dragstart)="drag($event)">
+          <td><input type='radio' name="chief" title="리더" (click)="appoint(e)"
                 [checked]="e.id == dept.chief"> &nbsp; {{e.name}}</td>
           <td>{{e.code}}</td>
           <td>{{e.phone}}</td>

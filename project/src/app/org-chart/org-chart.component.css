@@ -1,4 +1,4 @@
-tr {
+#emp_list_header, input {
   cursor: pointer;
 }
 [draggable="true"] {
