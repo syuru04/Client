@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { OrgChartComponent } from '../org-chart.component'
-import { OrgHttpService } from '../org-http.service';
 import { Dept } from '../../Dept/dept.model';
 
 @Component({
@@ -9,13 +8,17 @@ import { Dept } from '../../Dept/dept.model';
   styleUrls: ['./tree.component.css']
 })
 export class TreeComponent {
-  constructor(private orgHttp: OrgHttpService,
-              private parent: OrgChartComponent) {}
+  constructor(private parent: OrgChartComponent) {}
   @Input() orgs: Dept[];
 
   drag(e) {
     e.stopPropagation();
     e.dataTransfer.setData("id", e.target.id);
+  }
+
+  allow(e) {
+    e.stopPropagation();
+    e.preventDefault();
   }
 
   drop(e, o) {
@@ -27,25 +30,9 @@ export class TreeComponent {
       if (id[0] == 'm') {
         this.parent.transfer(id.substr(2), o, node);
       } else {
-        this.orgHttp.update({id, upId: o.id} as Dept).subscribe(() => {
-          this.parent.moveDept(id, o);
-          e.target.getElementsByTagName("UL")[0].appendChild(node);
-        });
-  // moveDept(id: number, o: Dept, node, target): void {
-  //   this.orgHttp.update({id, upId: o.id} as Dept).subscribe(() => {
-  //     o.sub.push(OrgChartComponent.removeFrom(this.orgs[0], id));
-  //     target.appendChild(node);
-  //   });    
-  // }
-
-        // this.parent.moveDept(id, o, node, e.target.getElementsByTagName("UL")[0]);
+        this.parent.moveDept(id, o, node, e.target.getElementsByTagName("UL")[0]);
       }
     }
-  }
-
-  allow(e) {
-    e.stopPropagation();
-    e.preventDefault();
   }
 
   click(e,o) {
