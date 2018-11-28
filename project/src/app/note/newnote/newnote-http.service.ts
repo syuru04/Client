@@ -22,7 +22,9 @@ export class NewNoteService {
   get(): Observable<Note[]> {
     return this.http.get<Note[]>(URL);
   }
-  
+  get2(id): Observable<Note> {
+    return this.http.get<Note>(URL + id);
+  }
   
   add(note: Note2): Observable<any> {
     return this.http.post<Note2>(URL, note, HTTP_OPTIONS).pipe(

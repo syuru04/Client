@@ -1,5 +1,4 @@
 import { Component, OnInit, } from '@angular/core';
-
 import { Note } from './note.model';
 import { NoteService } from './note-http.service';
 
@@ -12,34 +11,50 @@ import { NoteService } from './note-http.service';
 
 export class NoteComponent implements OnInit {
   today = new Date();
-
-  BodyFormYn = "N";
-  ListFormYn = "Y";
-
+  formStat = "list";
+  updateId=0;
+  
   notes: Note[];
   note:Note;
-  constructor(private service: NoteService) { }
 
+  constructor(private service: NoteService) { 
+  }
+  
   ngOnInit() {
     this.service.get().subscribe(data => {
       this.notes = data;
     });
   }
-  btnListClick() :void{
-    this.BodyFormYn="N"
-    this.ListFormYn = "Y";
-  }
-  btnTitleClick(id): void {
-    this.ListFormYn = "N";
-    this.BodyFormYn="Y";
-    this.service.get2(id).subscribe(data =>this.note = data);
+  outputEvent(formStat: string) {
+    this.formStat = formStat;
   }
 
-  remove(id: number) {
-    alert("Delete ?");
-    this.service.remove(id).subscribe(() => this.notes.splice(id, 1));
-    this.BodyFormYn="N"
-    this.ListFormYn = "Y";
+  goupdate(id){
+    this.formStat="input";   
+    this.updateId=id; 
+  }
+
+  btnListClick() :void{
+    this.formStat="list"
+  }
+
+  btnNewClick(): void {
+    this.formStat="input"
+  }
+
+  btnTitleClick(id): void {
+    this.formStat="detail"
+    this.service.get2(id).subscribe(data =>this.note = data);    
+  }
+
+  remove(id: number) {    
+    if(window.confirm("Delete ?")){
+      this.service.remove(id).subscribe(() => this.notes.splice(id, 1));
+      this.formStat="list"
+      window.location.reload();
+    }else{
+      return false;
+    }
   }
 }
 

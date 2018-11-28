@@ -31,11 +31,7 @@ export class NoteService {
     );
   }
   
-  add(note: Note[]): Observable<any> {
-    return this.http.put<Note[]>(URL, note, HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('insert'))
-    );
-  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
