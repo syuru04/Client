@@ -1,17 +1,18 @@
 <div>
-  <ui-tree [orgs]="orgs" (onOrgMove)="orgChange($event)"></ui-tree>
+  <ui-tree [orgs]="orgs"></ui-tree>
 </div>
 
-<div class="container">
-  <table class="table">
-    <tr *ngIf="chief">
-      <td><input type='radio' name="chief" (click)="relieve($event)" title="해임"></td>
-      <td>{{chief.name}}</td>
-      <td colspan="3">{{dept.name}}장</td>
-    </tr>
-    <tr *ngFor="let e of emps" id="m_{{e.id}}" draggable="true" (dragstart)="drag($event)">
-      <td><input type='radio' name="chief" [checked]="e.id==chief.id" (click)="appoint($event,e)" title="부서장"></td>
-      <td>{{e.name}}</td>
+<div class="container" *ngIf="emps && emps.length">
+    <h4 id="emp_list_header" (click)="relieve()">
+      {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
+    </h4>
+    <table class="table">
+        <tr *ngFor="let e of emps" id="m_{{e.id}}"
+            [class.sub]="e.deptId != dept.id"
+            [draggable]="e.deptId == dept.id && e.id != dept.chief"
+            (dragstart)="drag($event)" (click)="appoint(e)">
+      <td><input type='radio' name="chief" title="리더"
+            [checked]="e.id == dept.chief"> &nbsp; {{e.name}}</td>
       <td>{{e.code}}</td>
       <td>{{e.phone}}</td>
       <td>{{e.email}}</td>
