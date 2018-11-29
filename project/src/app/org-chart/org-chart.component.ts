@@ -85,6 +85,22 @@ export class OrgChartComponent implements OnInit {
     });
   }
 
+  addDept() {
+
+  }
+
+  deleteDept() {
+
+  }
+
+  deleteEmp(e, id) {
+    console.log(e.target.parentNode, id);
+    this.empHttp.remove(id).subscribe(() => {
+      e.target.parentNode.remove();
+      this.deleteFromEmps(id);
+    });
+  }
+
   drop(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -114,21 +130,21 @@ export class OrgChartComponent implements OnInit {
     this.emps.splice(i, 1);
   }
 
-  // o의 하위 부서들에서 부서 id를 찾아 제거하고 그것을 넘긴다
-  private static removeFrom(o: Dept, id: number): Dept {
+  // sup의 하위 부서에서 부서 id를 찾아 제거하고 그것을 넘긴다
+  private static removeFrom(sup: Dept, id: number): Dept {
     let i = 0;
-    for (let s of o.sub) {
-      if (s.id == id) return o.sub.splice(i, 1)[0];
-      if (s = this.removeFrom(s, id)) return s;
+    for (let d of sup.sub) {
+      if (d.id == id) return sup.sub.splice(i, 1)[0];
+      if (d = this.removeFrom(d, id)) return d;
       i++;
     }
     return null;
   }
 
-  // x가 y의 상위 부서인가?
-  private static isSub(x: Dept, y: Dept): boolean {
-    for (let s of x.sub) {
-      if (s == y || this.isSub(s, y)) return true;
+  // sub이 sup의 하위 부서인가?
+  private static isSub(sup: Dept, sub: Dept): boolean {
+    for (let d of sup.sub) {
+      if (d == sub || this.isSub(d, sub)) return true;
     }
     return false;
   }
