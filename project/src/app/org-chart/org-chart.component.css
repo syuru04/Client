@@ -11,7 +11,7 @@ header {
   width: 50%;
   text-align: center;
 }
-header > span, div > span {
+header > span, header > input, div > input {
   float: right;
 }
 input {

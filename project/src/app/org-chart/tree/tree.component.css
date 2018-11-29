@@ -1,7 +1,8 @@
 li {
   list-style-type: none;
-  border: 1px solid gainsboro;
+  border: 1px solid lightgrey;
   padding: 6px 0 6px 6px;
+  cursor: pointer;
 }
 li button {
   float: right;

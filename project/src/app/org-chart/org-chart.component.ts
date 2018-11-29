@@ -12,12 +12,12 @@ import { Emp } from '../emp/emp.model';
 export class OrgChartComponent implements OnInit {
   constructor(private orgHttp: OrgHttpService,
               private empHttp: EmpHttpService) {}
-  orgs: Dept[];  // 조직도
-  dept: Dept;    // 선택한 부서
-  emps: Emp[];   // 선택한 부서 직원 목록
-  clickedNode;
-  editing: boolean;
-  newDept: boolean;
+  orgs: Dept[];        // 조직도
+  dept: Dept;          // 선택한 부서
+  emps: Emp[];         // 선택한 부서 직원 목록
+  renaming: boolean;   // 선택한 부서 이름 바꾸는 중
+  adding: boolean;     // 새 부서 이름 넣는 중
+  addSup: Dept;        // 새 부서의 상위 부서
 
   ngOnInit() {
     this.get();
@@ -27,20 +27,17 @@ export class OrgChartComponent implements OnInit {
   get(): void {
     this.orgHttp.get().subscribe(org => {
       this.orgs = [org];
-      this.getEmps(null, this.orgs[0]);
+      this.getEmps(this.orgs[0]);
     });
   }
 
   // 선택한 부서 직원 목록 가져오기
-  getEmps(node, o: Dept) {
+  getEmps(o: Dept) {
     this.orgHttp.getMembers(o.id).subscribe(emps => {
-      this.clickedNode = node;
       this.dept = o;
       this.emps = emps;
     });
   }
-
-  // document.querySelector('#elementName').click();
 
   // 부서장 임명
   appoint(emp: Emp) {
@@ -67,6 +64,7 @@ export class OrgChartComponent implements OnInit {
   drag(e) {
     e.stopPropagation();
     e.dataTransfer.setData("id", e.target.id);
+    e.dataTransfer.effectAllowed = "move";
   }
 
   // 직원 부서 이동 실행
@@ -84,31 +82,37 @@ export class OrgChartComponent implements OnInit {
   }
 
   // 부서 조직 구조 변경
-  moveDept(id: number, o: Dept, node, target): void {
+  moveDept(id: number, o: Dept): void {
     this.orgHttp.update({id, upId: o.id} as Dept).subscribe(() => {
-      o.sub.push(this.deleteFromDepts(id));
-      target.appendChild(node);
+      o.sub.push(this.deleteFromDepts(id)[0]);
     });
   }
 
   // 부서 제거
   deleteDept() {
     this.orgHttp.remove(this.dept.id).subscribe(() => {
-      const n = this.clickedNode.parentNode.parentNode.parentNode;
-      const d = this.findDept(this.orgs[0], this.dept.upId);
-      this.clickedNode.remove();
-      this.deleteFromDepts(this.dept.id);
-      this.getEmps(n, d);
+      this.getEmps(this.deleteFromDepts(this.dept.id)[1]);
     });
   }
 
   addDept(o: Dept) {
-    this.newDept = true;
-    console.log(o);
-    // const name = "체육부";
-    // this.orgHttp.insert({ name, upId: o.id } as Dept).subscribe(() => {
-    //   this.get();
-    // });
+    this.adding = true;
+    this.addSup = o;
+  }
+
+  add(e) {
+    const newDept = { name: e.target.value, upId: this.addSup.id } as Dept;
+    this.orgHttp.insert(newDept).subscribe(() => {
+      this.addSup.sub.push(newDept);
+    });
+  }
+
+  rename(e) {
+    this.renaming = false;
+    const name = e.target.value; 
+    this.orgHttp.update({id: this.dept.id, name} as Dept).subscribe(() => {
+      this.dept.name = name;
+    });
   }
 
   // 사원 제거 (제거 버튼 이벤트, 사원 id)
@@ -119,7 +123,7 @@ export class OrgChartComponent implements OnInit {
     });
   }
 
-  deleteFromDepts(id: number): Dept {
+  deleteFromDepts(id: number): Dept[] {
     return this.deleteFrom(this.orgs[0], id);
   }
 
@@ -128,20 +132,13 @@ export class OrgChartComponent implements OnInit {
     this.emps.splice(i, 1);
   }
 
-  findDept(sup:Dept, id: number): Dept {
-    if (sup.id == id) return sup;
-    for (let d of sup.sub) {
-      if (d = this.findDept(d, id)) return d;
-    }
-    return null;
-  }
-
   // sup의 하위 부서에서 부서 id를 찾아 제거하고 그것을 넘긴다
-  private deleteFrom(sup: Dept, id: number): Dept {
+  private deleteFrom(sup: Dept, id: number): Dept[] {
     let i = 0;
     for (let d of sup.sub) {
-      if (d.id == id) return sup.sub.splice(i, 1)[0];
-      if (d = this.deleteFrom(d, id)) return d;
+      let o: Dept[];
+      if (d.id == id) return (o = sup.sub.splice(i, 1)).push(sup), o;
+      if (o = this.deleteFrom(d, id)) return o;
       i++;
     }
     return null;

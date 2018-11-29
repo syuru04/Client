@@ -2,20 +2,22 @@
   <div class="row">
     <div class="col-lg-4">
       <ui-tree [orgs]="orgs"></ui-tree>
-      <span *ngIf="newDept"><input id="new_dept" type="text"><button>+</button></span>
+      <input type="text" *ngIf="adding"
+            (keydown.enter)="add($event)" (keydown.esc)="adding=false">
       <br><br>
     </div>
-
     <div class="col-lg-8">
       <header *ngIf="dept">
-        <b (click)="editing = true;">{{dept.name}}</b> &nbsp; &nbsp; &nbsp; &nbsp;
+        <b (click)="renaming = true">{{dept.name}}</b> &nbsp; &nbsp; &nbsp; &nbsp;
         <button *ngIf="!emps || !emps.length" (click)="deleteDept()">x</button>
-        <span *ngIf="emps && emps.length && !editing">
+        <span *ngIf="emps && emps.length && !renaming">
           리더&nbsp; : &nbsp; &nbsp;
-          <span *ngIf="dept.chief">{{dept.chiefName}}  &nbsp; <button (click)="relieve()">x</button></span>
+          <span *ngIf="dept.chief">{{dept.chiefName}}  &nbsp;
+                <button (click)="relieve()">x</button></span>
           <span *ngIf="!dept.chief">(공석)</span>
         </span>
-        <span *ngIf="editing"><input type="text"><button>+</button></span>
+        <input type="text" *ngIf="renaming"
+              (keydown.enter)="rename($event)" (keydown.esc)="renaming=false">
       </header>
       <table class="table table-responsive">
         <tr *ngFor="let e of emps" id="e_{{e.id}}"

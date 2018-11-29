@@ -14,6 +14,7 @@ export class TreeComponent {
   drag(e) {
     e.stopPropagation();
     e.dataTransfer.setData("id", e.target.id);
+    e.dataTransfer.effectAllowed = "move"; 
   }
 
   allow(e) {
@@ -23,24 +24,24 @@ export class TreeComponent {
 
   drop(e, o) {
     e.stopPropagation();
-    e.preventDefault();
     const nodeId = e.dataTransfer.getData("id");
     const node = document.getElementById(nodeId);
     const id = nodeId.substr(2) as number;
     if (nodeId[0] == 'e') {
+      e.preventDefault();
       this.parent.transfer(id, o, node);
     } else if (!node.contains(e.target)) {
-      this.parent.moveDept(id, o, node, e.target.lastChild.lastChild);
+      e.preventDefault();
+      this.parent.moveDept(id, o);
     }
   }
 
   click(e, o) {
     e.stopPropagation();
-    e.preventDefault();
-    this.parent.getEmps(e.target, o);
+    this.parent.getEmps(o);
   }
-  
-  addDept(e,o) {
+
+  addDept(e, o) {
     e.stopPropagation();
     this.parent.addDept(o);
   }
