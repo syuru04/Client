@@ -1,12 +1,25 @@
-#emp_list_header, input {
+header b, input[type="radio"] {
   cursor: pointer;
 }
 [draggable="true"] {
   cursor: move;
 }
-#emp_list_header {
-  margin: 0 0 5px 28px;
+b {
+  font-size: 1.3em;
+}
+header {
+  width: 50%;
+  text-align: center;
+}
+header > span, div > span {
+  float: right;
+}
+input {
+  text-align: center;
+}
+table {
+  background-color: #f8f8f8;
 }
 .sub {
-  background-color: beige;
+  background-color: #e8e8e8;
 }

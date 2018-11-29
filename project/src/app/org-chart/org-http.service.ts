@@ -19,6 +19,10 @@ export class OrgHttpService {
     return this.http.get<Dept>(URL + "org");
   }
 
+  insert(dept: Dept): Observable<any> {
+    return this.http.post<Dept>(URL, dept, HTTP_OPTIONS);
+  }
+
   update(dept: Dept): Observable<any> {
     return this.http.put<Dept>(URL, dept, HTTP_OPTIONS);
   }

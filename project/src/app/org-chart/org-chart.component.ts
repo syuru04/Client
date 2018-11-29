@@ -15,6 +15,9 @@ export class OrgChartComponent implements OnInit {
   orgs: Dept[];  // 조직도
   dept: Dept;    // 선택한 부서
   emps: Emp[];   // 선택한 부서 직원 목록
+  clickedNode;
+  editing: boolean;
+  newDept: boolean;
 
   ngOnInit() {
     this.get();
@@ -24,17 +27,20 @@ export class OrgChartComponent implements OnInit {
   get(): void {
     this.orgHttp.get().subscribe(org => {
       this.orgs = [org];
-      this.getEmps(org);
+      this.getEmps(null, this.orgs[0]);
     });
   }
 
   // 선택한 부서 직원 목록 가져오기
-  getEmps(o: Dept) {
+  getEmps(node, o: Dept) {
     this.orgHttp.getMembers(o.id).subscribe(emps => {
+      this.clickedNode = node;
       this.dept = o;
       this.emps = emps;
     });
   }
+
+  // document.querySelector('#elementName').click();
 
   // 부서장 임명
   appoint(emp: Emp) {
@@ -69,7 +75,7 @@ export class OrgChartComponent implements OnInit {
       this.empHttp.update({id, deptId: toDept.id} as Emp).subscribe(() => {
         const emp = this.emps.find(e => e.id == id);
         emp.deptId = toDept.id;
-        if (!OrgChartComponent.isSub(this.dept, toDept)) {
+        if (!this.isSub(this.dept, toDept)) {
           node.remove();
           this.deleteFromEmps(id);
         }
@@ -85,44 +91,36 @@ export class OrgChartComponent implements OnInit {
     });
   }
 
-  addDept() {
-
-  }
-
+  // 부서 제거
   deleteDept() {
-
+    this.orgHttp.remove(this.dept.id).subscribe(() => {
+      const n = this.clickedNode.parentNode.parentNode.parentNode;
+      const d = this.findDept(this.orgs[0], this.dept.upId);
+      this.clickedNode.remove();
+      this.deleteFromDepts(this.dept.id);
+      this.getEmps(n, d);
+    });
   }
 
+  addDept(o: Dept) {
+    this.newDept = true;
+    console.log(o);
+    // const name = "체육부";
+    // this.orgHttp.insert({ name, upId: o.id } as Dept).subscribe(() => {
+    //   this.get();
+    // });
+  }
+
+  // 사원 제거 (제거 버튼 이벤트, 사원 id)
   deleteEmp(e, id) {
-    console.log(e.target.parentNode, id);
     this.empHttp.remove(id).subscribe(() => {
       e.target.parentNode.remove();
       this.deleteFromEmps(id);
     });
   }
 
-  drop(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    const nodeId = e.dataTransfer.getData("id");
-    const node = document.getElementById(nodeId);
-    const id = nodeId.substr(2) as number;
-    if (nodeId[0] == 'e') {
-      this.empHttp.remove(id).subscribe(() => {
-        node.remove();
-        this.deleteFromEmps(id);
-      });
-    } else if (!node.contains(e.target)) {
-      console.log(node.lastChild.lastChild.childNodes.length);
-      // this.orgHttp.remove(id).subscribe(() => {
-      //   node.remove();
-      //   this.deleteFromDepts(id);
-      // });
-    }
-  }
-
   deleteFromDepts(id: number): Dept {
-    return OrgChartComponent.removeFrom(this.orgs[0], id);
+    return this.deleteFrom(this.orgs[0], id);
   }
 
   deleteFromEmps(id: number): void {
@@ -130,32 +128,30 @@ export class OrgChartComponent implements OnInit {
     this.emps.splice(i, 1);
   }
 
+  findDept(sup:Dept, id: number): Dept {
+    if (sup.id == id) return sup;
+    for (let d of sup.sub) {
+      if (d = this.findDept(d, id)) return d;
+    }
+    return null;
+  }
+
   // sup의 하위 부서에서 부서 id를 찾아 제거하고 그것을 넘긴다
-  private static removeFrom(sup: Dept, id: number): Dept {
+  private deleteFrom(sup: Dept, id: number): Dept {
     let i = 0;
     for (let d of sup.sub) {
       if (d.id == id) return sup.sub.splice(i, 1)[0];
-      if (d = this.removeFrom(d, id)) return d;
+      if (d = this.deleteFrom(d, id)) return d;
       i++;
     }
     return null;
   }
 
   // sub이 sup의 하위 부서인가?
-  private static isSub(sup: Dept, sub: Dept): boolean {
+  private isSub(sup: Dept, sub: Dept): boolean {
     for (let d of sup.sub) {
       if (d == sub || this.isSub(d, sub)) return true;
     }
     return false;
   }
-  // private static removeFrom(id: number, o: Dept): Dept {
-  //   const i = o.sub.findIndex(s => s.id == id);
-  //   if (0 <= i) {
-  //     return o.sub.splice(i, 1)[0];
-  //   }
-  //   for (let s of o.sub) {
-  //     if (s = this.removeFrom(id, s)) return s;
-  //   }
-  //   return null;
-  // }
 }

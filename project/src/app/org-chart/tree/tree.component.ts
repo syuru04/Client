@@ -37,6 +37,11 @@ export class TreeComponent {
   click(e, o) {
     e.stopPropagation();
     e.preventDefault();
-    this.parent.getEmps(o);
+    this.parent.getEmps(e.target, o);
+  }
+  
+  addDept(e,o) {
+    e.stopPropagation();
+    this.parent.addDept(o);
   }
 }

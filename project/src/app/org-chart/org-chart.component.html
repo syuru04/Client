@@ -1,19 +1,22 @@
 <div class="bs-docs-section">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
       <ui-tree [orgs]="orgs"></ui-tree>
+      <span *ngIf="newDept"><input id="new_dept" type="text"><button>+</button></span>
+      <br><br>
     </div>
 
     <div class="col-lg-8">
-      <h4 id="emp_list_header" *ngIf="dept">
-        <span>{{dept.name}}</span> &nbsp; <button (click)="addDept()">+</button> &nbsp;
+      <header *ngIf="dept">
+        <b (click)="editing = true;">{{dept.name}}</b> &nbsp; &nbsp; &nbsp; &nbsp;
         <button *ngIf="!emps || !emps.length" (click)="deleteDept()">x</button>
-        <span *ngIf="emps && emps.length">
-          리더:
+        <span *ngIf="emps && emps.length && !editing">
+          리더&nbsp; : &nbsp; &nbsp;
           <span *ngIf="dept.chief">{{dept.chiefName}}  &nbsp; <button (click)="relieve()">x</button></span>
           <span *ngIf="!dept.chief">(공석)</span>
         </span>
-      </h4>
+        <span *ngIf="editing"><input type="text"><button>+</button></span>
+      </header>
       <table class="table table-responsive">
         <tr *ngFor="let e of emps" id="e_{{e.id}}"
             [class.sub]="e.deptId != dept.id"
@@ -36,26 +39,3 @@
     </div>
   </div>
 </div>
-
-<!--<div>
-  <ui-tree [orgs]="orgs"></ui-tree>
-</div>
-
- <div class="container" *ngIf="emps && emps.length">
-    <h4 id="emp_list_header" (click)="relieve()">
-      {{dept.name}}장 &nbsp; {{dept.chief? dept.chiefName: "(공석)"}}
-    </h4>
-    <table class="table">
-        <tr *ngFor="let e of emps" id="m_{{e.id}}"
-            [class.sub]="e.deptId != dept.id"
-            [draggable]="e.deptId == dept.id && e.id != dept.chief"
-            (dragstart)="drag($event)" (click)="appoint(e)">
-      <td><input type='radio' name="chief" title="리더"
-            [checked]="e.id == dept.chief"> &nbsp; {{e.name}}</td>
-      <td>{{e.code}}</td>
-      <td>{{e.phone}}</td>
-      <td>{{e.email}}</td>
-    </tr>
-  </table>
-</div> -->
-
