@@ -1,15 +1,19 @@
-header b, input[type="radio"] {
+input[type="radio"], strong, b {
   cursor: pointer;
 }
 [draggable="true"] {
   cursor: move;
 }
+strong {
+  font-size: 1.3rem;
+}
 b {
-  font-size: 1.3em;
+  color: red;
 }
 header {
   width: 50%;
   text-align: center;
+  margin: 0 0 0.5rem;
 }
 header > span, header > input, div > input {
   float: right;

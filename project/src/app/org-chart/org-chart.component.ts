@@ -96,8 +96,9 @@ export class OrgChartComponent implements OnInit {
   }
 
   addDept(o: Dept) {
-    this.adding = true;
     this.addSup = o;
+    this.adding = true;
+    // document.getElementById("add").focus();
   }
 
   add(e) {
@@ -106,7 +107,7 @@ export class OrgChartComponent implements OnInit {
       this.addSup.sub.push(newDept);
     });
   }
-
+  
   rename(e) {
     this.renaming = false;
     const name = e.target.value; 

@@ -2,22 +2,23 @@
   <div class="row">
     <div class="col-lg-4">
       <ui-tree [orgs]="orgs"></ui-tree>
-      <input type="text" *ngIf="adding"
-            (keydown.enter)="add($event)" (keydown.esc)="adding=false">
+      <input type="text" *ngIf="adding" placeholder="새 부서 이름"
+            (keydown.enter)="add($event)" (keydown.esc)="adding = false" autofocus>
       <br><br>
     </div>
     <div class="col-lg-8">
       <header *ngIf="dept">
-        <b (click)="renaming = true">{{dept.name}}</b> &nbsp; &nbsp; &nbsp; &nbsp;
-        <button *ngIf="!emps || !emps.length" (click)="deleteDept()">x</button>
+        <strong (click)="renaming = true"
+          title="클릭 -> 이름 바꾸기">{{dept.name}}</strong> &nbsp; &nbsp; &nbsp; &nbsp;
+        <b *ngIf="!emps || !emps.length" (click)="deleteDept()" title="폐쇄">&#x2716;</b>
         <span *ngIf="emps && emps.length && !renaming">
           리더&nbsp; : &nbsp; &nbsp;
           <span *ngIf="dept.chief">{{dept.chiefName}}  &nbsp;
-                <button (click)="relieve()">x</button></span>
+                <b (click)="relieve()" title="해임">&#x2716;</b></span>
           <span *ngIf="!dept.chief">(공석)</span>
         </span>
-        <input type="text" *ngIf="renaming"
-              (keydown.enter)="rename($event)" (keydown.esc)="renaming=false">
+        <input type="text" *ngIf="renaming" placeholder="새 이름" autofocus
+              (keydown.enter)="rename($event)" (keydown.esc)="renaming = false">
       </header>
       <table class="table table-responsive">
         <tr *ngFor="let e of emps" id="e_{{e.id}}"
@@ -27,15 +28,13 @@
           <td>
             <input type="radio" name="chief" title="리더"
               [checked]="e.id == dept.chief" (click)="appoint(e)"> &nbsp;
-              {{e.name}}
+              {{e.name}} &nbsp;
+            <b *ngIf="e.deptId == dept.id && e.id != dept.chief"
+                title="퇴사" (click)="deleteEmp($event, e.id)">&#x2716;</b>
           </td>
           <td>{{e.code}}</td>
           <td>{{e.phone}}</td>
           <td>{{e.email}}</td>
-          <td>
-            <button *ngIf="e.deptId == dept.id && e.id != dept.chief"
-                  (click)="deleteEmp($event, e.id)">x</button>
-          </td>
         </tr>
       </table>
     </div>

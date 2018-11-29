@@ -2,7 +2,8 @@
   <li *ngFor="let o of orgs" draggable="true" (dragstart)="drag($event)"
           id="d_{{o.id}}" (dragover)="allow($event)" (drop)="drop($event,o)"
           (click)="click($event,o)">
-    {{o.name}}<button (click)="addDept($event,o)">+</button>
+    {{o.name}}<b title="하위 부서 만들기"
+          (click)="addDept($event,o)">+ &nbsp; &nbsp; </b>
     <ui-tree [orgs]="o.sub"></ui-tree>
   </li>
 </ul>
