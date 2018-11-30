@@ -7,3 +7,6 @@ export class Note {
     ts : string;
    
 }
+export class NotePage{
+    count : number;
+}

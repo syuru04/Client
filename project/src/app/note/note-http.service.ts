@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Note } from './note.model';
+import { Note, NotePage } from './note.model';
 import { catchError } from 'rxjs/operators';
 
 
@@ -30,8 +30,18 @@ export class NoteService {
       catchError(this.handleError<any>('delete'))
     );
   }
-  
 
+  pageRange(id:number, range:number): Observable<any> {
+    return this.http.post<any>(URL+'range/', [id, range], HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('pageRange'))
+    );
+  }
+  
+  pageCount(): Observable<any> {        
+    return this.http.post<any>(URL+'count/', HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('pageCount'))
+    );
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
