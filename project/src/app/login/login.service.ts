@@ -31,8 +31,8 @@ export class LoginService {
     );
   }
 
-  getEmp(id:string): Observable<Emp[]> {
-    return this.http.post<Emp[]>(URL+'c/', id, HTTP_OPTIONS);
+  getEmp(id:string): Observable<Emp> {
+    return this.http.post<Emp>(URL+'c/', id, HTTP_OPTIONS);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
