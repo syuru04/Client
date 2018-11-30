@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Note } from '../note.model';
 import { NewNoteService } from './newnote-http.service';
 import { DatePipe } from '@angular/common';
-import { loadavg } from 'os';
 
 @Component({
   selector: 'app-newnote',
