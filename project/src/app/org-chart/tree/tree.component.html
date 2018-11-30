@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let d of depts" draggable="true" (dragstart)="drag($event)"
+  <li *ngFor="let d of depts" [draggable]="d.upId" (dragstart)="drag($event)"
           id="d_{{d.id}}" (dragover)="allow($event)" (drop)="drop($event,d)"
           (click)="click($event,d)">
     {{d.name}} <b title="하위 부서 만들기" (click)="addDept($event,d)">+</b>
