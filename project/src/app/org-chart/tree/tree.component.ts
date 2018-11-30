@@ -9,40 +9,42 @@ import { Dept } from '../../Dept/dept.model';
 })
 export class TreeComponent {
   constructor(private parent: OrgChartComponent) {}
-  @Input() orgs: Dept[];
+  @Input() depts: Dept[];
 
-  drag(e) {
+  drag(e): void {
     e.stopPropagation();
     e.dataTransfer.setData("id", e.target.id);
     e.dataTransfer.effectAllowed = "move"; 
   }
 
-  allow(e) {
+  allow(e): void {
     e.stopPropagation();
     e.preventDefault();
   }
 
-  drop(e, o) {
+  drop(e, d: Dept): void {
     e.stopPropagation();
     const nodeId = e.dataTransfer.getData("id");
     const node = document.getElementById(nodeId);
-    const id = nodeId.substr(2) as number;
-    if (nodeId[0] == 'e') {
+    const id = nodeId.substr(2) as number;   // 부서 id
+    if (nodeId[0] == 'e') {                  // 직원을 끌어왔나?
       e.preventDefault();
-      this.parent.transfer(id, o, node);
-    } else if (!node.contains(e.target)) {
+      this.parent.transfer(id, d, node);     // 직원 부서 이동
+    } else if (!node.contains(e.target)) {   // 하위 부서로 안가는가?
       e.preventDefault();
-      this.parent.moveDept(id, o);
+      this.parent.moveDept(id, d);           // 부서 조직 변경
     }
   }
 
-  click(e, o) {
+  // 클릭한 부서의 직원 목록을 만든다
+  click(e, d: Dept): void {
     e.stopPropagation();
-    this.parent.getEmps(o);
+    this.parent.getEmps(d);
   }
 
-  addDept(e, o) {
+  // 부서를 새로 만든다
+  addDept(e, d: Dept): void {
     e.stopPropagation();
-    this.parent.addDept(o);
+    this.parent.addDept(d);
   }
 }

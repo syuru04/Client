@@ -1,34 +1,39 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-4">
-      <ui-tree [orgs]="orgs"></ui-tree>
-      <input type="text" *ngIf="adding" placeholder="새 부서 이름"
-            (keydown.enter)="add($event)" (keydown.esc)="adding = false" autofocus>
+      <ui-tree [depts]="depts"></ui-tree>
+      <input *ngIf="adding" placeholder="새 부서 이름" title="Enter: 적용, Esc: 취소"
+        type="text" (keydown.enter)="add($event)" (keydown.esc)="adding = false" autofocus>
       <br><br>
     </div>
+
     <div class="col-lg-8">
       <header *ngIf="dept">
-        <strong (click)="renaming = true"
-          title="클릭 -> 이름 바꾸기">{{dept.name}}</strong> &nbsp; &nbsp; &nbsp; &nbsp;
-        <b *ngIf="!emps || !emps.length" (click)="deleteDept()" title="폐쇄">&#x2716;</b>
-        <span *ngIf="emps && emps.length && !renaming">
-          리더&nbsp; : &nbsp; &nbsp;
-          <span *ngIf="dept.chief">{{dept.chiefName}}  &nbsp;
-                <b (click)="relieve()" title="해임">&#x2716;</b></span>
-          <span *ngIf="!dept.chief">(공석)</span>
+        <strong title="클릭 -> 이름 바꿈" (click)="renaming = true">{{dept.name}}</strong>
+        &nbsp; &nbsp; &nbsp; &nbsp; 
+        <b *ngIf="!emps || !emps.length" title="폐쇄" (click)="deleteDept()">&#x2716;</b>
+        <span *ngIf="emps && emps.length && !renaming">리더&nbsp; : &nbsp; &nbsp;
+          <span *ngIf="dept.chief">
+            {{dept.chiefName}} &nbsp; <b title="해임" (click)="relieve()">&#x2716;</b>
+          </span>
+          <span *ngIf="!dept.chief">(없음)</span>
         </span>
-        <input type="text" *ngIf="renaming" placeholder="새 이름" autofocus
-              (keydown.enter)="rename($event)" (keydown.esc)="renaming = false">
+        <input *ngIf="renaming" placeholder="새 이름" title="Enter: 적용, Esc: 취소" autofocus
+          type="text" (keydown.enter)="rename($event)" (keydown.esc)="renaming = false">
       </header>
-      <table class="table table-responsive">
+
+      <table class="table" *ngIf="emps && emps.length">
+        <tr>
+          <th>이름</th><th>별명</th><th>전화</th><th>이메일</th>
+        </tr>
         <tr *ngFor="let e of emps" id="e_{{e.id}}"
-            [class.sub]="e.deptId != dept.id"
+            [class.sub-dept]="e.deptId != dept.id"
             [draggable]="e.deptId == dept.id && e.id != dept.chief"
             (dragstart)="drag($event)">
           <td>
-            <input type="radio" name="chief" title="리더"
-              [checked]="e.id == dept.chief" (click)="appoint(e)"> &nbsp;
-              {{e.name}} &nbsp;
+            <input title="리더" type="radio" name="chief"
+                [checked]="e.id == dept.chief" (click)="appoint(e)">
+            &nbsp; {{e.name}} &nbsp;
             <b *ngIf="e.deptId == dept.id && e.id != dept.chief"
                 title="퇴사" (click)="deleteEmp($event, e.id)">&#x2716;</b>
           </td>

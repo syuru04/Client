@@ -1,19 +1,14 @@
-input[type="radio"], strong, b {
-  cursor: pointer;
-}
-[draggable="true"] {
-  cursor: move;
-}
-strong {
-  font-size: 1.3rem;
-}
-b {
-  color: red;
+.col-lg-4 {
+  font-size: 1.8rem;
+  margin-top: 3.3rem;
 }
 header {
   width: 50%;
   text-align: center;
   margin: 0 0 0.5rem;
+}
+strong {
+  font-size: 2rem;
 }
 header > span, header > input, div > input {
   float: right;
@@ -21,9 +16,21 @@ header > span, header > input, div > input {
 input {
   text-align: center;
 }
+input[type="radio"], strong, b {
+  cursor: pointer;
+}
+[draggable="true"] {
+  cursor: move;
+}
+b {
+  color: red;
+}
 table {
   background-color: #f8f8f8;
 }
-.sub {
+tr th:first-child {
+  padding-left: 3rem;
+}
+.sub-dept {
   background-color: #e8e8e8;
 }
