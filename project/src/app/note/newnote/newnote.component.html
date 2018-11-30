@@ -1,11 +1,10 @@
 <div class="table-responsive">
-  <form #f="ngForm" class="form-horizontal"  (ngSubmit)="add(f)">
+  <form #f="ngForm" #g="ngForm" class="form-horizontal"  (ngSubmit)="add(f)" (ngSubmit)="update(g)">      
     <h4 class="sub-header">게시판 글작성</h4>
     <div class="control-group" id="fields">
       <div class="controls">
-        <div class="well bs-component">
-          
-          <div ng-app="myApp" ngControl="myCtrl">            
+        <div class="well bs-component">          
+          <div ng-app="myApp" ngControl="myCtrl" >            
             <input type="text" id="author" name="author" [ngModel]="author" value={{note?.author}}/>   
             <!-- value="1" -->
             <input type="text" id="ts" name="ts" [ngModel]="ts">
@@ -26,7 +25,8 @@
           </div>
           <p class="text-right">
             <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel()">취소</a>
-            <button type="submit" class="btn btn-primary btn-sm" id="btn_new">등록</button>
+            <button *ngIf="addBtn =='Y'" type="submit" class="btn btn-primary btn-sm" id="btn_new" >등록</button>                        
+            <button *ngIf="updateBtn =='Y'" type="submit" class="btn btn-primary btn-sm" id="btn_new" >수정</button>                        
           </p>
         </div>
       </div>

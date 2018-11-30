@@ -13,7 +13,8 @@ import { Emp } from '../emp/emp.model';
 })
 export class JoinComponent implements OnInit {
 
-  @Output() outputProperty = new EventEmitter<string>();
+  @Output() outputProperty: EventEmitter<any> = new EventEmitter();
+
   loginProc = '';
   depts: Dept[];  
   emps: Emp[];
@@ -30,14 +31,13 @@ export class JoinComponent implements OnInit {
   }
 
   cancel(): void {
-    this.loginProc = 'login';
-    this.outputProperty.emit(this.loginProc); 
+    this.outputProperty.next({loginProc:'login'});
   }
 
   add(form: NgForm) {
     const emp = Object.assign({ done: false }, form.value);
-    this.joinService.add(emp).subscribe(
-      emp => {}
-    );
+    this.joinService.add(emp).subscribe(emp => {
+      this.outputProperty.next({loginProc:'login'});
+    });
   }
 }

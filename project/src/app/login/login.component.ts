@@ -15,19 +15,24 @@ export class LoginComponent implements OnInit {
     pw:'1234'
   };
   emp: Emp;
+  emps: Emp[];
 
   isPwOk: boolean;
   errorMessage = '';
   loginProc = '';
 
-  @Output() outputProperty = new EventEmitter<string>();
+  id: number;
+  deptId: number;
+  name: string;
+  code: string;
+
+  @Output() outputProperty: EventEmitter<any> = new EventEmitter();
    
   constructor(
     private loginService: LoginService,
     private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   login() {
     this.loginService.pwChk(this.user.id,this.user.pw).subscribe(
@@ -35,21 +40,27 @@ export class LoginComponent implements OnInit {
         this.isPwOk = result; 
         if(this.isPwOk) {
           // 세션 처리 로직 필요
-          this.loginService.getEmp(this.user.id).subscribe(data => {});          
-          this.loginProc = 'loginSuccess';
+          this.loginService.getEmp(this.user.id).subscribe(data => {
+            this.emp = data;
+            
+            // 세션에 넣기
+            sessionStorage.setItem('loginData',JSON.stringify(this.emp));
+            
+            this.outputProperty.next({
+              loginProc:'loginSuccess'
+            });
+          });          
 
         } else {
           this.errorMessage = 'id 또는 pw 가 일치하지 않습니다.';
-          this.loginProc = 'login';
+          this.outputProperty.next({loginProc:'login'});
         }        
-        this.outputProperty.emit(this.loginProc);  // 부모 컴포넌트에 값 전달
       }
     );
   }
 
   join() {
-    this.loginProc = 'join';
-    this.outputProperty.emit(this.loginProc); 
+    this.outputProperty.next({loginProc:'join'});
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Note, Note2 } from './newnote.model';
+import { Note, Note2, Note3 } from './newnote.model';
 import { catchError } from 'rxjs/operators';
 
 
@@ -29,6 +29,13 @@ export class NewNoteService {
   add(note: Note2): Observable<any> {
     return this.http.post<Note2>(URL, note, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('insert'))
+    );
+  }
+
+  update(note: Note3): Observable<any> {
+    console.log(note);    
+    return this.http.put<Note3>(URL, note, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('update'))
     );
   }
 
