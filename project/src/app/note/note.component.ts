@@ -12,8 +12,9 @@ import { NoteService } from './note-http.service';
 export class NoteComponent implements OnInit {
   today = new Date();
   formStat = "list";
-  updateId=0;
-  
+  updateId : number;
+  index : number;
+
   notes: Note[];
   note:Note;
 
@@ -33,16 +34,17 @@ export class NoteComponent implements OnInit {
     this.formStat="input";   
     this.updateId=id; 
   }
-
+  
   btnListClick() :void{
     this.formStat="list"
   }
-
+  
   btnNewClick(): void {
     this.formStat="input"
   }
-
-  btnTitleClick(id): void {
+  
+  btnTitleClick(id : number ,i : number): void {
+    this.index=i;      
     this.formStat="detail"
     this.service.get2(id).subscribe(data =>this.note = data);    
   }

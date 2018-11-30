@@ -13,3 +13,9 @@ export class Note2 {
     author : number;
     ts : string;   
 }
+export class Note3 {
+    id:number;
+    title : string;  
+    body : string;      
+    author : number;
+}

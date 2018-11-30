@@ -1,5 +1,5 @@
 <div *ngIf="formStat=='input'">
-  <app-newnote (outputProperty)="outputEvent($event)" [updateId]="updateId"></app-newnote>
+  <app-newnote (outputProperty)="outputEvent($event)" [updateId]="updateId" [index]="index" ></app-newnote>
 </div>
     
 <div *ngIf="formStat=='detail'">
@@ -46,9 +46,9 @@
       </tr>
     </thead>    
     <tbody>
-      <tr *ngFor="let note of notes">
+      <tr *ngFor="let note of notes;index as i" data-index="#i"> 
         <td>{{note.id}}</td>
-        <td><a (click)="btnTitleClick(note.id)">{{note.title}}</a></td>
+        <td><a (click)="btnTitleClick(note.id,i)">{{note.title}}</a></td>
         <td>{{note.name}}</td>
         <td type="date">{{note.ts | date:'yy.MM.dd HH:mm:ss'}}</td>
       </tr>

@@ -42,6 +42,8 @@ export class EmpComponent implements OnInit {
     this.openForm = "Y";
     this.selectedEmp = emp;
     this.index = i;
+   
+    
   }
 
   btnCancel_click() : void {
