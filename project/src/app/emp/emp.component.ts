@@ -39,11 +39,9 @@ export class EmpComponent implements OnInit {
   }
 
   onSelect(emp : Emp, i: number): void {
-    this.openForm = "Y";
     this.selectedEmp = emp;
     this.index = i;
-   
-    
+    this.openForm = "Y";
   }
 
   btnCancel_click() : void {
@@ -57,7 +55,9 @@ export class EmpComponent implements OnInit {
 
   update(form: NgForm) {    
     let emp = Object.assign({ id: this.selectedEmp.id }, form.value);
-    this.empService.update(emp).subscribe(() => this.emps[this.index]=emp);
+    this.empService.update(emp).subscribe(() => {
+      window.location.reload();
+    });
     
     this.openForm = "N";
   }

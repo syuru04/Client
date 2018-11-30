@@ -9,11 +9,12 @@ export class AppComponent {
   title = 'project';
   loginProc = 'login';
 
-  outputEvent(active: string) {
-    this.loginProc = active
-  }
-
   logOut() {
     this.loginProc = 'login';
+    sessionStorage.removeItem;
+  }
+
+  receive(data) {
+    this.loginProc = data.loginProc
   }
 }
