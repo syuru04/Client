@@ -41,8 +41,7 @@ export class NewnoteComponent implements OnInit {
   }
 
   add(form: NgForm) {
-    const note = Object.assign({ done: false }, form.value);
-
+    const note = Object.assign({ done: false }, form.value);    
     if (note.title === undefined) {
       note.title = "제목없음"
       note.title = note.title.trim();
