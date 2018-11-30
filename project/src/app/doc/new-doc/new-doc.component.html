@@ -6,9 +6,9 @@
           <label class="col-lg-2 control-label">전결</label>
           <div class="col-lg-8">
             <label class="radio-label">
-              <input class="radioBtn" type="radio" name="finalUser" value="">기안자 &nbsp;&nbsp;
-              <input class="radioBtn" type="radio" name="finalUser" value="">기안자 &nbsp;&nbsp;
-              <input class="radioBtn" type="radio" name="finalUser" value="">기안자
+              <input class="radioBtn" type="radio" name="approver" value="lev1Chief">{{lev1Name}} ({{lev1Dept}}) &nbsp;&nbsp;
+              <input class="radioBtn" type="radio" name="approver" value="lev2Chief">{{lev2Name}} ({{lev2Dept}}) &nbsp;&nbsp;
+              <input class="radioBtn" type="radio" name="approver" value="lev3Chief">{{lev3Name}} ({{lev3Dept}})
             </label>
           </div>
         </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <p class="text-right">
-          <a class="btn btn-default btn-sm" id="btn_cancel" routerLink="../../doc">취소</a>&nbsp;
+          <a class="btn btn-default btn-sm" id="btn_cancel">취소</a>&nbsp;
           <a class="btn btn-primary btn-sm" id="btn_new">등록</a>
         </p>
       </div>

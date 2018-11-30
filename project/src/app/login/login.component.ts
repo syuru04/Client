@@ -11,20 +11,14 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   user = {
-    id:'홍',
+    id:'최',
     pw:'1234'
   };
   emp: Emp;
-  emps: Emp[];
 
   isPwOk: boolean;
   errorMessage = '';
   loginProc = '';
-
-  id: number;
-  deptId: number;
-  name: string;
-  code: string;
 
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
    

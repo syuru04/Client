@@ -23,8 +23,6 @@ export class DocComponent implements OnInit {
 
     // 세션값 가져오기
     const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
-    this.id = sessionValue.id;    
-    console.log('session ID : '+this.id);
-    
+    this.id = sessionValue.id;        
   }
 }
