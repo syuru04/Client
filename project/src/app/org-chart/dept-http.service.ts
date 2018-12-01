@@ -12,7 +12,7 @@ const HTTP_OPTIONS = {
 };
 
 @Injectable({providedIn: 'root'})
-export class OrgHttpService {
+export class DeptHttpService {
   constructor(private http: HttpClient) {}
 
   get(): Observable<Dept> {
@@ -27,7 +27,7 @@ export class OrgHttpService {
     return this.http.put<Dept>(URL, dept, HTTP_OPTIONS);
   }
 
-  remove(id: number): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete(URL + id);
   }
 

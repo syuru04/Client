@@ -1,13 +1,13 @@
 li {
   list-style-type: none;
-  border: 1px solid lightgrey;
-  padding: 0.6rem 0 0.6rem 0.6rem;
+  border: 1px solid silver;
+  padding: .6rem 0 .6rem 1rem;
 }
 li li:first-child {
-  margin-top: 0.6rem;
+  margin-top: .6rem;
 }
 li li:last-child {
-  margin-bottom: -0.6rem;
+  margin-bottom: -.6rem;
 }
 li li {
   border-right-width: 0;

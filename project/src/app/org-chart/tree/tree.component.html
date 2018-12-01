@@ -1,8 +1,10 @@
 <ul>
-  <li *ngFor="let d of depts" [draggable]="d.upId" (dragstart)="drag($event)"
-          id="d_{{d.id}}" (dragover)="allow($event)" (drop)="drop($event,d)"
-          (click)="click($event,d)">
-    {{d.name}} <b title="하위 부서 만들기" (click)="addDept($event,d)">+</b>
+  <li *ngFor="let d of depts" id="d_{{d.id}}" [draggable]="d.upId"
+              (dragstart)="parent.drag($event)"
+               (dragover)="parent.drop(false,$event,d)"
+                   (drop)="parent.drop(true,$event,d)"
+                  (click)="parent.selectDept($event,d)">
+    {{d.name}} <b (click)="parent.addDept($event,d)" title="하위 부서 만들기">+</b>
     <ui-tree [depts]="d.sub"></ui-tree>
   </li>
 </ul>
