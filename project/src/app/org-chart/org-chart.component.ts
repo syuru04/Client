@@ -74,7 +74,7 @@ export class OrgChartComponent implements OnInit {
     e.stopPropagation();
     const id = parseInt(this.draggedId.substr(2));  // id: 직원 또는 부서
     if (this.draggedId[0] == 'e') { // 직원인가?
-      if (this.dept != dept) {      // 직원이 옮겨갈 곳은 다른 부서다
+      if (this.dept != dept) {
         e.preventDefault();
         if (isDrop) {
           this.moveEmp(id, dept);   // 직원 옮김
@@ -107,7 +107,7 @@ export class OrgChartComponent implements OnInit {
 
   // dept 부서가 sup 부서의 하위 부서인가? (하위 부서?, 상위 부서)
   private isSubOf(dept: Dept, sup: Dept): boolean {
-    for (let s of sup.sub) {
+    for (const s of sup.sub) {
       if (s == dept || this.isSubOf(s, dept)) return true;
     }
     return false;
@@ -129,7 +129,7 @@ export class OrgChartComponent implements OnInit {
   // 넣을 부서를 받는 부서에 이름 순으로 넣는다 (넣을 부서, 받는 부서)
   private insertOrdered(d, dept): void {
     let i = 0;
-    for (let s of dept.sub) {
+    for (const s of dept.sub) {
       if (d.name.localeCompare(s.name) < 0) break;
       i++;
     }
@@ -151,7 +151,7 @@ export class OrgChartComponent implements OnInit {
   // id로 부서를 찾아 없앤다 (id, 찾을 곳) --> [없앤 부서, 그 상위 부서]
   private deleteFrom(id: number, dept: Dept): Dept[] {
     let i = 0;
-    for (let s of dept.sub) {
+    for (const s of dept.sub) {
       if (s.id == id) return [dept.sub.splice(i, 1)[0], dept];
       const dp = this.deleteFrom(id, s);
       if (dp) return dp;
