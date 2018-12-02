@@ -17,6 +17,9 @@ strong {
 header > span, header > input, div > input {
   float: right;
 }
+header > span {
+  margin-top: .5rem;
+}
 input {
   text-align: center;
 }
