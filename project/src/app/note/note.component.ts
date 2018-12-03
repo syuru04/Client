@@ -99,6 +99,7 @@ export class NoteComponent implements OnInit {
   
   btnNewClick(): void {  
     this.formStat="input"
+    this.updateId = undefined;
   }
   
   btnTitleClick(id : number ,i : number): void {

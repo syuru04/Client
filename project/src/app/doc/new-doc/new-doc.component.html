@@ -22,7 +22,7 @@
             <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{doc?.title}} />
           </div>
           <label class="col-lg-2 control-label">
-            <input type="checkbox" id="publish" name="publish" [ngModel]="publish" value={{doc?.publish}} checked>공지여부 {{doc?.publish}} 
+            <input type="checkbox" id="publish" name="publish" [ngModel]="publish" value={{doc?.publish}}>공지여부 {{doc?.publish}} 
           </label>          
         </div>
 
@@ -34,7 +34,7 @@
         </div>
         <p class="text-right">
           <a class="btn btn-default btn-sm" id="btn_cancel" (click)="cancel(f)">취소</a>&nbsp;
-          <button type="submit" class="btn btn-primary btn-sm" id="btn_new">등록</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn_new">저장</button>
         </p>
       </div>
     </div>

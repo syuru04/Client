@@ -22,14 +22,15 @@ export class NewDocHttpService {
   }
 
   add(doc: NewDoc): Observable<NewDoc> {
-    
     return this.http.post<NewDoc>(URL, doc, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('add'))
     );
   }
 
-  getDetail(id): Observable<Doc> {
-    return this.http.get<Doc>(URL + id);
+  update(doc: NewDoc): Observable<NewDoc> {
+    return this.http.put<NewDoc>(URL, doc, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('add'))
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

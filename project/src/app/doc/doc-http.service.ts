@@ -20,6 +20,10 @@ export class DocHttpService {
     return this.http.get<Doc[]>(URL);
   }
 
+  getDetail(id): Observable<Doc> {
+    return this.http.get<Doc>(URL + id);
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

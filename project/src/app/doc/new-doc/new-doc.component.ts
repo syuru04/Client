@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { NewDocHttpService } from './new-doc-http.service';
-import { NewDoc } from './new-doc.model';
+import { DocHttpService } from '../doc-http.service';
 import { Doc } from '../doc.model';
 
 @Component({
@@ -14,9 +14,8 @@ import { Doc } from '../doc.model';
 export class NewDocComponent implements OnInit {
 
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
-  @Input() id: number;
+  @Input() updateId: number;
 
-  appr: NewDoc;
   doc: Doc;
   docs: Doc[];
 
@@ -32,8 +31,12 @@ export class NewDocComponent implements OnInit {
 
   ts: string;
   author: number;
+  docProc: string;
 
-  constructor(private newDocService: NewDocHttpService) { }
+  constructor(
+    private newDocService: NewDocHttpService,
+    private docService: DocHttpService
+    ) { }
 
 
   ngOnInit() {    
@@ -58,23 +61,29 @@ export class NewDocComponent implements OnInit {
     var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.ts = date2;
     
-    if (this.id != undefined) {
-      this.newDocService.getDetail(this.id).subscribe(data => {
+    if (this.updateId != undefined) {
+      this.docService.getDetail(this.updateId).subscribe(data => {
         this.doc = data;
+        this.docProc = 'detail';
       });
     }     
   }
 
   f_action(form: NgForm) {
-    const docForm = form.value;    
-    this.newDocService.add(docForm).subscribe(doc => {
-      this.outputProperty.next({docProc:'list'});    
-      form.reset();
-    });
+
+    if(this.docProc=='detail') {
+      this.newDocService.update(form.value).subscribe(doc => {
+        this.outputProperty.next({docProc:'list'});  
+      }); 
+      
+    } else {
+      this.newDocService.add(form.value).subscribe(doc => {
+        this.outputProperty.next({docProc:'list'});  
+      }); 
+    }     
   }
 
   cancel(form: NgForm): void {
-    form.reset();
     this.outputProperty.next({docProc:'list'});
   }
 
