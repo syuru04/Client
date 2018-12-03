@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { NewDoc } from './new-doc.model';
+import { Doc } from '../doc.model';
 
 const URL = 'http://localhost:8080/docs/';
 
@@ -17,6 +19,17 @@ export class NewDocHttpService {
 
   getUpinfo(id:number): Observable<NewDoc> {
     return this.http.post<NewDoc>(URL+'u/', id, HTTP_OPTIONS);
+  }
+
+  add(doc: NewDoc): Observable<NewDoc> {
+    
+    return this.http.post<NewDoc>(URL, doc, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('add'))
+    );
+  }
+
+  getDetail(id): Observable<Doc> {
+    return this.http.get<Doc>(URL + id);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

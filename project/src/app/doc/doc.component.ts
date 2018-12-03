@@ -11,12 +11,15 @@ import { DocHttpService} from './doc-http.service';
 export class DocComponent implements OnInit {
 
   docs: Doc[];
-
-  id:number;
+  doc: Doc;
+  id: number;
+  updateId : number;
+  docProc: string;  // list, ins, mod
 
   constructor(private docService: DocHttpService) { }
 
   ngOnInit() {
+    this.docProc = 'list';
     this.docService.get().subscribe(data => {
       this.docs = data;
     });
@@ -24,5 +27,18 @@ export class DocComponent implements OnInit {
     // 세션값 가져오기
     const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
     this.id = sessionValue.id;        
+  }
+
+  receive(data):void {
+    this.docProc = data.docProc
+  }
+  
+  new(): void {
+    this.docProc = 'ins';
+  }
+
+  mod(id:number): void {
+    this.id = id;
+    this.docProc = 'mod';
   }
 }

@@ -2,6 +2,9 @@
   <div class="control-group" id="fields">
     <div class="controls">
       <div class="well bs-component">
+        <input type="hidden" id="author" name="author" [ngModel]="author" value={{doc?.author}}/>   
+        <input type="hidden" id="ts" name="ts" [ngModel]="ts">
+        
         <div class="form-group">
           <label class="col-lg-2 control-label">전결</label>
           <div class="col-lg-8">
@@ -15,19 +18,22 @@
 
         <div class="form-group">
           <label class="col-lg-2 control-label">제목</label>
-          <div class="col-lg-8">
-            <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}} />
+          <div class="col-lg-6">
+            <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{doc?.title}} />
           </div>
+          <label class="col-lg-2 control-label">
+            <input type="checkbox" id="publish" name="publish" [ngModel]="publish" value={{doc?.publish}} checked>공지여부 {{doc?.publish}} 
+          </label>          
         </div>
 
         <div class="form-group">
           <label for="textArea" class="col-lg-2 control-label">내용</label>
           <div class="col-lg-8">
-            <textarea class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body" value={{note?.body}}></textarea>
+            <textarea class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body" value={{doc?.body}}></textarea>
           </div>
         </div>
         <p class="text-right">
-          <a class="btn btn-default btn-sm" id="btn_cancel">취소</a>&nbsp;
+          <a class="btn btn-default btn-sm" id="btn_cancel" (click)="cancel(f)">취소</a>&nbsp;
           <button type="submit" class="btn btn-primary btn-sm" id="btn_new">등록</button>
         </p>
       </div>

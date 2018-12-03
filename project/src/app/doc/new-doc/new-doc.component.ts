@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { NewDocHttpService } from './new-doc-http.service';
 import { NewDoc } from './new-doc.model';
+import { Doc } from '../doc.model';
 
 @Component({
   selector: 'app-new-doc',
@@ -10,7 +13,13 @@ import { NewDoc } from './new-doc.model';
 })
 export class NewDocComponent implements OnInit {
 
+  @Output() outputProperty: EventEmitter<any> = new EventEmitter();
+  @Input() id: number;
+
   appr: NewDoc;
+  doc: Doc;
+  docs: Doc[];
+
   lev1Dept: string;
   lev1Chief: number;
   lev1Name: string;
@@ -20,6 +29,9 @@ export class NewDocComponent implements OnInit {
   lev3Dept: string;
   lev3Chief: number;
   lev3Name: string;
+
+  ts: string;
+  author: number;
 
   constructor(private newDocService: NewDocHttpService) { }
 
@@ -40,6 +52,30 @@ export class NewDocComponent implements OnInit {
       this.lev3Chief = data.lev3Chief,
       this.lev3Name = data.lev3Name
     });
+
+    this.author = sessionValue.id;
+    var datePipe = new DatePipe("en-US");
+    var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    this.ts = date2;
+    
+    if (this.id != undefined) {
+      this.newDocService.getDetail(this.id).subscribe(data => {
+        this.doc = data;
+      });
+    }     
+  }
+
+  f_action(form: NgForm) {
+    const docForm = form.value;    
+    this.newDocService.add(docForm).subscribe(doc => {
+      this.outputProperty.next({docProc:'list'});    
+      form.reset();
+    });
+  }
+
+  cancel(form: NgForm): void {
+    form.reset();
+    this.outputProperty.next({docProc:'list'});
   }
 
 }
