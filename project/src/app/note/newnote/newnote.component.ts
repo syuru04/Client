@@ -19,14 +19,16 @@ export class NewnoteComponent implements OnInit {
   formStat = "";
   addBtn = "Y";
   updateBtn = "N";
-
+  id : number;
   @Output() outputProperty = new EventEmitter<String>();
   @Input() updateId: number;
   @Input() index: number;
 
   constructor(private service: NewNoteService) { }
   ngOnInit() {
-    if (this.updateId === undefined) {
+    
+    
+    if (this.updateId === undefined) {            
       this.addBtn = "Y";
       this.updateBtn = "N";
       console.log("addBtn Y");
@@ -52,9 +54,9 @@ export class NewnoteComponent implements OnInit {
 
   add(form: NgForm) {
     if (this.updateId === undefined) {
-      alert("add" + form.value + Object.values(form));
-      const note = Object.assign({ done: false }, form.value);
-      alert(note);
+      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
+      const note = Object.assign({ done: false }, form.value);      
+      note.author = sessionValue.id;              
       if (note.title === undefined) {
         note.title = "제목없음"
         note.title = note.title.trim();
@@ -64,6 +66,7 @@ export class NewnoteComponent implements OnInit {
         alert("내용을 입력하세요");
         return false;
       }
+      alert(note.author);
       this.service.add(note).subscribe(
         note => {
           this.notes.push(note);
@@ -77,11 +80,8 @@ export class NewnoteComponent implements OnInit {
   update(form: NgForm) {
     if (this.updateId === undefined) {
       return false;
-    } else {
-
-      alert("update" + form.value + Object.values(form));
-      let note = Object.assign({ id: this.updateId }, form.value);
-      alert(this.index);
+    } else {      
+      let note = Object.assign({ id: this.updateId }, form.value);     
 
       this.service.update(note).subscribe(() => {
         this.formStat = "list";
