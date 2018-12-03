@@ -13,6 +13,7 @@ export class OrgChartComponent implements OnInit {
   constructor(private deptHttp: DeptHttpService,
               private empHttp: EmpHttpService) {}
   
+  private manager: boolean;
   private depts: Dept[];      // 조직도 root
   private dept: Dept;         // 부서
   private emps: Emp[];        // 부서 직원 목록
@@ -22,10 +23,15 @@ export class OrgChartComponent implements OnInit {
   private draggedId: string;  // 끌려가는 노드 id
 
   ngOnInit() {
+    this.manager = this.isManager();
     this.deptHttp.get().subscribe(dept => {
       this.depts = [dept];  // 조직도 root
       this.setDept(dept);   // 부서를 root 부서로 초기화
     });
+  }
+
+  private isManager(): boolean {
+    return (JSON.parse(sessionStorage.getItem("loginData")) as Emp).id == 1;
   }
 
   // 부서 선택 (조직도에서 클릭 이벤트, 클릭한 부서)
@@ -59,8 +65,10 @@ export class OrgChartComponent implements OnInit {
   }
 
   private renameDept() {
-    this.renaming = true;  // 바꿀 부서 이름 입력 창을 연다
-    setTimeout(() => document.getElementById("r").focus(), 0);
+    if (this.manager) {
+      this.renaming = true;  // 바꿀 부서 이름 입력 창을 연다
+      setTimeout(() => document.getElementById("r").focus(), 0);  
+    }
   }
 
   // 부서 이름을 바꾼다 (입력 창에서 Enter 키를 누른 이벤트)
