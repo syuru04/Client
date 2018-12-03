@@ -1,68 +1,68 @@
 <div class="out">
-    <div class="in">
-      <h4 class="text-danger" style="font-weight: bold">
-        *회원가입
-      </h4>
-  
-      <form class="form-horizontal" (ngSubmit)="add(f)" #f="ngForm" name="form">
-        <div class="well bs-component">
-          <fieldset>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">아이디</label>
-                <div class="col-lg-6">                              
-                  <input type="text" class="form-control" name="code" id="code" [ngModel]="f.value.code" required/>
-                </div>                     
-              </div>
+  <div class="in">
+    <h4 *ngIf="proc=='join'" class="text-danger" style="font-weight: bold">*회원가입</h4>
+    <h4 *ngIf="proc=='empMod'" class="text-danger" style="font-weight: bold">*회원정보수정</h4>
+
+    <form class="form-horizontal" (ngSubmit)="f_submit(f)" #f="ngForm" name="form">
+      <div class="well bs-component">
+        <fieldset>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">아이디</label>
+              <div class="col-lg-6">                              
+                <input *ngIf="proc=='empMod'" type="hidden" class="form-control" name="id" id="id" [ngModel]="emp?.id"/>
+                <input type="text" class="form-control" name="code" id="code" [ngModel]="emp?.code" required/>
+              </div>                     
             </div>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">패스워드</label>
-                <div class="col-lg-6">
-                  <input type="password" class="form-control" name="pw" id="pw" [ngModel]="f.value.pw" required/>
-                </div>                          
-              </div>
+          </div>
+          <div *ngIf="proc=='join'"  class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">패스워드</label>
+              <div class="col-lg-6">
+                <input type="password" class="form-control" name="pw" id="pw" [ngModel]="emp?.pw" required/>
+              </div>                          
             </div>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">이름</label>
-                <div class="col-lg-6">                              
-                  <input type="text" class="form-control" name="name" id="name" [ngModel]="f.value.name" required/>
-                </div>                     
-              </div>
+          </div>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">이름</label>
+              <div class="col-lg-6">                              
+                <input type="text" class="form-control" name="name" id="name" [ngModel]="emp?.name" required/>
+              </div>                     
             </div>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">부서</label>
-                <div class="col-lg-6">                              
-                  <select class="form-control" name="deptId" id="deptId" [ngModel]="f.value.deptId">
-                    <option *ngFor="let dept of depts" [value]="dept.id">{{dept.name}}</option>               
-                  </select>
-                </div>                     
-              </div>
+          </div>
+          <div *ngIf="proc=='join'" class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">부서</label>
+              <div class="col-lg-6">                              
+                <select class="form-control" name="deptId" id="deptId" [ngModel]="f.value.deptId">
+                  <option *ngFor="let dept of depts" [value]="dept.id">{{dept.name}}</option>               
+                </select>
+              </div>                     
             </div>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">휴대폰</label>
-                <div class="col-lg-6">                              
-                  <input type="text" class="form-control" name="phone" id="phone" placeholder="010-0000-0000" [ngModel]="f.value.phone" required/>
-                </div>                     
-              </div>
+          </div>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">휴대폰</label>
+              <div class="col-lg-6">                              
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="010-0000-0000" [ngModel]="emp?.phone" required/>
+              </div>                     
             </div>
-            <div class="row"> 
-              <div class="form-group">
-                <label class="col-lg-3 control-label">이메일</label>
-                <div class="col-lg-6">                              
-                  <input type="text" class="form-control" name="email" id="email" placeholder="example@kr.com" [ngModel]="f.value.email" required/>
-                </div>                     
-              </div>
+          </div>
+          <div class="row"> 
+            <div class="form-group">
+              <label class="col-lg-3 control-label">이메일</label>
+              <div class="col-lg-6">                              
+                <input type="text" class="form-control" name="email" id="email" placeholder="example@kr.com" [ngModel]="emp?.email" required/>
+              </div>                     
             </div>
-            <p class="text-center">
-              <a class="btn btn-default" (click)="cancel()">취소</a>&nbsp;&nbsp;
-              <button type="submit" class="btn btn-primary">가입</button>
-            </p>
-          </fieldset>
-        </div>  
-      </form>
-    </div>
+          </div>
+          <p class="text-center">
+            <a class="btn btn-default" (click)="cancel()">취소</a>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary">등록</button>
+          </p>
+        </fieldset>
+      </div>  
+    </form>
   </div>
+</div>

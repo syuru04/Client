@@ -1,4 +1,4 @@
-<form id="frmForm" name="frmForm" class="form-horizontal">
+<form #f="ngForm" (ngSubmit)="f_action(f)" class="form-horizontal">
   <div class="control-group" id="fields">
     <div class="controls">
       <div class="well bs-component">
@@ -6,9 +6,9 @@
           <label class="col-lg-2 control-label">전결</label>
           <div class="col-lg-8">
             <label class="radio-label">
-              <input class="radioBtn" type="radio" name="approver" value="lev1Chief">{{lev1Name}} ({{lev1Dept}}) &nbsp;&nbsp;
-              <input class="radioBtn" type="radio" name="approver" value="lev2Chief">{{lev2Name}} ({{lev2Dept}}) &nbsp;&nbsp;
-              <input class="radioBtn" type="radio" name="approver" value="lev3Chief">{{lev3Name}} ({{lev3Dept}})
+              <span><input class="radioBtn" type="radio" name="approver" [value]="lev1Chief">{{lev1Name}} ({{lev1Dept}}) &nbsp;&nbsp;</span>
+              <span *ngIf="lev2Name"><input class="radioBtn" type="radio" name="approver" [value]="lev2Chief">{{lev2Name}} ({{lev2Dept}}) &nbsp;&nbsp;</span>
+              <span *ngIf="lev3Name"><input class="radioBtn" type="radio" name="approver" [value]="lev3Chief">{{lev3Name}} ({{lev3Dept}})</span>
             </label>
           </div>
         </div>
@@ -16,19 +16,19 @@
         <div class="form-group">
           <label class="col-lg-2 control-label">제목</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="title" name="title" />
+            <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}} />
           </div>
         </div>
 
         <div class="form-group">
           <label for="textArea" class="col-lg-2 control-label">내용</label>
           <div class="col-lg-8">
-            <textarea class="form-control" rows="10" id="cont" name="cont" style="resize: none;"></textarea>
+            <textarea class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body" value={{note?.body}}></textarea>
           </div>
         </div>
         <p class="text-right">
           <a class="btn btn-default btn-sm" id="btn_cancel">취소</a>&nbsp;
-          <a class="btn btn-primary btn-sm" id="btn_new">등록</a>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn_new">등록</button>
         </p>
       </div>
     </div>

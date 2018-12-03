@@ -8,13 +8,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'project';
   loginProc = 'login';
-
-  logOut() {
+  
+  logOut():void {
     this.loginProc = 'login';
     sessionStorage.removeItem;
   }
 
-  receive(data) {
+  receive(data):void {
     this.loginProc = data.loginProc
+  }
+
+  empMod():void {
+    this.loginProc = 'empMod';
   }
 }
