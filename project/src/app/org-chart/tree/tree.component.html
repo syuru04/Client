@@ -1,10 +1,10 @@
 <ul>
-  <li *ngFor="let dept of depts" id="d_{{dept.id}}" [draggable]="dept.upId"
+  <li *ngFor="let dept of depts" id="d_{{dept.id}}" [draggable]="dept.upId" 
              (dragstart)="parent.drag($event)"
               (dragover)="parent.drop(false, $event, dept)"
                   (drop)="parent.drop(true, $event, dept)"
                  (click)="parent.selectDept($event, dept)">
-    &#x205e;&#x205e;&#x205e; <span>{{dept.name}}</span>
+    <span>&#x205e;&#x205e;&#x205e;</span> {{dept.name}}
     <b title="하위 부서 만들기" (click)="parent.addDept($event, dept)">+</b>
     <ui-tree [depts]="dept.sub"></ui-tree>
   </li>
