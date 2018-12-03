@@ -10,4 +10,5 @@ import { Dept } from '../../Dept/dept.model';
 export class TreeComponent {
   constructor(private parent: OrgChartComponent) {}
   @Input() private depts: Dept[];
+  @Input() private manager: boolean;
 }
