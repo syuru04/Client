@@ -46,10 +46,4 @@ table{
     margin: 0 1px;
 }
 
-.pagination a.active {
-    background-color: #4CAF50;
-    color: white;
-    border: 1px solid #4CAF50;
-}
-
 .pagination a:hover:not(.active) {background-color: #ddd;}

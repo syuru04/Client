@@ -53,16 +53,16 @@
         <td type="date">{{note.ts | date:'yy.MM.dd HH:mm:ss'}}</td>
       </tr>
     </tbody>
-  </table>
+  </table>  
   <div class="center">
     <div class="pagination">
       <a >&laquo;</a>
     </div>
-    <div class="pagination" *ngFor="let a of fakeArray; let index = index">
-      <a (click)="pageBtnClick">{{ index }} </a>
+    <div class="pagination" *ngFor="let a of pageArray">
+      <a (click)="pageBtnClick(a)">{{ a }}</a>
     </div>
     <div class="pagination">
       <a>&raquo;</a>
-    </div>
+    </div>    
   </div>
-</div>
+ 
