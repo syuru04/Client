@@ -21,6 +21,12 @@ export class JoinService {
     );
   }
 
+  update(emp: Emp): Observable<Emp> {
+    return this.http.put<Emp>(URL, emp, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('update'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

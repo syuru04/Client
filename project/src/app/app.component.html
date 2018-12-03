@@ -1,5 +1,5 @@
-<div *ngIf="loginProc=='join'">
-  <app-join (outputProperty)="receive($event)"></app-join>
+<div *ngIf="loginProc=='join'||loginProc=='empMod'">
+  <app-join (outputProperty)="receive($event)" [proc]="loginProc"></app-join>
 </div>
 
 <div *ngIf="loginProc=='login'">
