@@ -40,15 +40,12 @@ export class LoginComponent implements OnInit {
             // 세션에 넣기
             sessionStorage.setItem('loginData',JSON.stringify(this.emp));
             
-            this.outputProperty.next({
-              loginProc:'loginSuccess'
-            });
-          });          
-
+            this.outputProperty.next({loginProc:'loginSuccess'});
+          });                    
         } else {
           this.errorMessage = 'id 또는 pw 가 일치하지 않습니다.';
           this.outputProperty.next({loginProc:'login'});
-        }        
+        }                
       }
     );
   }
