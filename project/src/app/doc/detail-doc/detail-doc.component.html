@@ -1,0 +1,33 @@
+<h4 class="sub-header">전자결재 상세보기</h4>
+<table class="table table-bordered">
+  <tr>
+    <th style="width:20%">작성일</th>
+    <td class="textLeft">{{doc?.ts | date:'yyyy년 MM월 dd일 HH시 mm분'}}</td>
+  </tr>
+  <tr>
+    <th>결재라인</th>
+    <td class="textLeft"></td>
+  </tr>
+  <tr>
+    <th>공지여부</th>
+    <td class="textLeft">{{doc?.publish?'Y':'N'}}</td>
+  </tr>
+  <tr style="text-align:left">
+    <th>제목</th>
+    <td class="textLeft">
+      {{doc?.title}}
+    </td>
+  </tr>
+  <tr style="text-align:left">
+    <th>내용</th>
+    <td class="textLeft">
+      {{doc?.body}}
+    </td>
+  </tr>
+</table>
+<!-- 게시판 버튼 -->
+<p class="text-right" style="margin-top: 10px">
+  <a class="btn btn-default btn-sm" id="btn_del" (click)="remove(doc.id)">삭제</a>&nbsp;
+  <a class="btn btn-primary btn-sm" id="btn_mod" (click)="mod(doc.id)">수정</a>&nbsp;
+  <a class="btn btn-default btn-sm" id="btn_list" (click)="docList()">목록</a>
+</p>

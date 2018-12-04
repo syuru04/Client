@@ -39,23 +39,7 @@ export class DocComponent implements OnInit {
   }
 
   detail(updateId:number): void {
+    this.updateId = updateId;
     this.docProc = 'detail';
-    this.docService.getDetail(updateId).subscribe(data => {
-      this.doc = data;      
-    });
-  }
-
-  mod(id:number): void {
-    this.updateId = id;
-    this.docProc = 'mod';
-  }
-
-  remove(updateId:number): void {
-    this.docProc = 'list';
-    // 수정중
-  }
-
-  docList() {
-    this.docProc = 'list';
   }
 }
