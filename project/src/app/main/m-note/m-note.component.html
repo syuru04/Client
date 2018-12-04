@@ -1,0 +1,21 @@
+<div class="responsive">
+  <h5 class="sub-header" routerLink="note">게시판</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-lg-2">번호</th>
+        <th class="col-lg-6">제목</th>
+        <th class="col-lg-2">작성자</th>
+        <th class="col-lg-2">등록일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of notes;index as i" data-index="#i">
+        <td>{{note.id}}</td>
+        <td class="textLeft"><a (click)="btnTitleClick(note.id,i)">{{note.title}}</a></td>
+        <td>{{note.name}}</td>
+        <td>{{note.ts | date:'MM.dd'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
