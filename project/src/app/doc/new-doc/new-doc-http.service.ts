@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError }  from 'rxjs/operators';
 
-import { NewDoc } from './new-doc.model';
-import { Doc } from '../doc.model';
+import { Doc } from '../model/doc.model';
+import { Approver } from '../model/approver.model';
+import { DocAppr } from '../model/doc-appr.model';
 
 const URL = 'http://localhost:8080/docs/';
+const URLAppr = 'http://localhost:8080/appr/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,18 +19,24 @@ export class NewDocHttpService {
 
   constructor(private http: HttpClient) { }
 
-  getUpinfo(id:number): Observable<NewDoc> {
-    return this.http.post<NewDoc>(URL+'u/', id, HTTP_OPTIONS);
+  getUpinfo(id:number): Observable<DocAppr> {
+    return this.http.post<DocAppr>(URL+'u/', id, HTTP_OPTIONS);
   }
 
-  add(doc: NewDoc): Observable<NewDoc> {
-    return this.http.post<NewDoc>(URL, doc, HTTP_OPTIONS).pipe(
+  add(doc: Doc): Observable<any> {
+    return this.http.post<number>(URL, doc, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('add'))
     );
   }
 
-  update(doc: NewDoc): Observable<NewDoc> {
-    return this.http.put<NewDoc>(URL, doc, HTTP_OPTIONS).pipe(
+  update(doc: Doc): Observable<Doc> {
+    return this.http.put<Doc>(URL, doc, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('add'))
+    );
+  }
+
+  addAppr(approver:Approver): Observable<Approver> {
+    return this.http.post<Approver>(URLAppr, approver, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('add'))
     );
   }

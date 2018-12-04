@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DocHttpService } from '../doc-http.service';
 import { DetailDocHttpService } from './detail-doc-http.service';
-import { Doc } from '../doc.model';
+import { Doc } from '../model/doc.model';
+import { DocApprDetail } from '../model/doc-appr-detail.model';
 
 @Component({
   selector: 'app-detail-doc',
@@ -16,6 +17,7 @@ export class DetailDocComponent implements OnInit {
 
   doc: Doc;
   docProc: string;
+  docApprs: DocApprDetail[];
 
   constructor(
     private detailDocService: DetailDocHttpService,
@@ -24,6 +26,11 @@ export class DetailDocComponent implements OnInit {
   ngOnInit() {
     this.docService.getDetail(this.updateId).subscribe(data => {
       this.doc = data;      
+    });
+
+    this.detailDocService.getApproverList(this.updateId).subscribe(data => {
+      console.log(data);
+      this.docApprs = data;      
     });
   }
 

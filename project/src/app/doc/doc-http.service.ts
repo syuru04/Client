@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Doc } from './doc.model';
+import { Doc } from './model/doc.model';
 
 const URL = 'http://localhost:8080/docs/';
 

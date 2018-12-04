@@ -8,18 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'project';
   loginProc = 'login';
-  sessionValue;
-  user = {
-    id: 0    
-  };
   
-  constructor(){
-    sessionStorage.setItem('loginData',JSON.stringify(this.user));
-    this.sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
-    if(this.sessionValue.id >0){
+  constructor(){    
+    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
+    if(sessionValue){   
       this.loginProc = 'loginSuccess'
     }else{
-      return null;
+      return null;     
     }
   }
 

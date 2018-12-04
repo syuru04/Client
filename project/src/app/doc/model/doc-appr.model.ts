@@ -1,4 +1,4 @@
-export class NewDoc {
+export class DocAppr {
     lev1Dept: string;
     lev1Chief: number;
     lev1Name: string;

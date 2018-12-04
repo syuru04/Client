@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Doc } from './doc.model';
+import { Doc } from './model/doc.model';
 import { DocHttpService} from './doc-http.service';
 
 @Component({
