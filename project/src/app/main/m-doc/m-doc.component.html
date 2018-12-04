@@ -1,0 +1,21 @@
+<div class="responsive">
+  <h5 class="sub-header" routerLink="doc" >전자결재</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-lg-2">번호</th>
+        <th class="col-lg-2">작성부서</th>
+        <th class="col-lg-6">제목</th>
+        <th class="col-lg-2">작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of docs; index as i">
+        <td>{{doc.id}}</td>
+        <td>{{doc.deptName}}</td>
+        <td class="textLeft"><a (click)="detail(doc.id)">{{doc.title}}</a></td>
+        <td>{{doc.ts|date:'MM.dd'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

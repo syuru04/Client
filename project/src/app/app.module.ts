@@ -17,6 +17,8 @@ import { NewDocComponent } from './doc/new-doc/new-doc.component';
 import { LoginComponent } from './login/login.component';
 import { JoinComponent } from './join/join.component';
 import { MainComponent } from './main/main.component';
+import { MNoteComponent } from './main/m-note/m-note.component';
+import { MDocComponent } from './main/m-doc/m-doc.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MainComponent } from './main/main.component';
     NewDocComponent,
     LoginComponent,
     JoinComponent,
-    MainComponent
+    MainComponent,
+    MNoteComponent,
+    MDocComponent
   ],
   imports: [
     BrowserModule,

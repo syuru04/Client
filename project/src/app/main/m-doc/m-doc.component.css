@@ -1,0 +1,34 @@
+table, th,div {
+    padding: 7px;
+    text-align: center;
+    table-layout: fixed;    
+    min-width: 50px;
+    border: 1px solid #dad9d9;    
+}
+a {
+    cursor: pointer;   
+}
+
+th{
+    
+    background-color:#F6F8F8;
+    padding:7px;
+    border: 1px solid #c0c0c0;    
+}
+
+td{
+    padding:7px;
+    table-layout: fixed;
+      
+}
+tr{
+    width: 100%;    
+}
+
+h5{
+    text-align: center;
+    color:#3399FF; 
+    font-weight:bold; 
+    font-size:15px;
+    cursor: pointer;   
+}

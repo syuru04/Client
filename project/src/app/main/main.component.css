@@ -1,0 +1,14 @@
+table{
+    width: 50%;
+	table-layout: fixed;
+}
+img{
+    height: 30%;
+    width: 100%;
+    /* max-height: 400px; */
+    table-layout: fixed;    
+    align-content: center;
+    opacity: 0.7;
+        
+}
+
