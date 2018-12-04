@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { NewDocHttpService } from './new-doc-http.service';
 import { DocHttpService } from '../doc-http.service';
 import { Doc } from '../doc.model';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-new-doc',
@@ -77,11 +78,15 @@ export class NewDocComponent implements OnInit {
         this.outputProperty.next({docProc:'list'});  
       }); 
       
-    // 신규등록
+    // 등록
     } else {
+      // doc: 기본내용저장
       this.newDocService.add(form.value).subscribe(doc => {
         this.outputProperty.next({docProc:'list'});  
       }); 
+
+      // approve: 결재자저장
+      // this.newDocService.addAppr().subscribe()
     }     
   }
 

@@ -17,6 +17,7 @@ import { NewDocComponent } from './doc/new-doc/new-doc.component';
 import { LoginComponent } from './login/login.component';
 import { JoinComponent } from './join/join.component';
 import { DetailDocComponent } from './doc/detail-doc/detail-doc.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailDocComponent } from './doc/detail-doc/detail-doc.component';
     NewDocComponent,
     LoginComponent,
     JoinComponent,
-    DetailDocComponent
+    DetailDocComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { EmpComponent } from '../emp/emp.component';
 import { NoteComponent } from '../note/note.component';
 import { OrgChartComponent } from '../org-chart/org-chart.component';
 import { NewnoteComponent } from '../note/newnote/newnote.component';
+import { MainComponent} from '../main/main.component';
 
 const routes: Routes = [
   { path: 'dept', component: DeptComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'emp', component: EmpComponent },
   { path: 'note', component: NoteComponent },
   { path: 'org-chart', component: OrgChartComponent },
-  { path: 'note/newnote', component: NewnoteComponent }
+  { path: 'note/newnote', component: NewnoteComponent },
+  { path: 'main', component: MainComponent }
+  
   ];
 
 @NgModule({
