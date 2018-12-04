@@ -71,11 +71,13 @@ export class NewDocComponent implements OnInit {
 
   f_action(form: NgForm) {
 
+    // 수정시 데이터 가져오기
     if(this.docProc=='detail') {
       this.newDocService.update(form.value).subscribe(doc => {
         this.outputProperty.next({docProc:'list'});  
       }); 
       
+    // 신규등록
     } else {
       this.newDocService.add(form.value).subscribe(doc => {
         this.outputProperty.next({docProc:'list'});  

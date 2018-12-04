@@ -41,6 +41,6 @@ export class DetailDocComponent implements OnInit {
     // 수정중
   }
 
-  
+     
 
 }

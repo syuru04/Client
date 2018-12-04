@@ -11,9 +11,10 @@ export class AppComponent {
 
   constructor(){
     const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
-    if(sessionValue.id >0){
-      this.loginProc = 'loginSuccess'
-    }
+
+    // if(sessionValue.id >0){
+    //   this.loginProc = 'loginSuccess'
+    // }
   }
 
   logOut(): void {
